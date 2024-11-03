@@ -1,7 +1,7 @@
 package com.hero.z_market.data.response
 
 import com.google.gson.annotations.SerializedName
-import com.hero.z_market.domain.model.SearchedGoodsModel
+import com.hero.z_market.domain.model.GoodsModel
 
 data class PageResponseAppGoodsInfoDTO(
     val data: List<AppGoodsInfoDTO>,
@@ -9,21 +9,21 @@ data class PageResponseAppGoodsInfoDTO(
 )
 
 data class AppGoodsInfoDTO(
-    @SerializedName("goodsInfoSeq") val goodsInfoSeq: Int, // 상품 번호**
-    @SerializedName("dispYn") val dispYn: String, // Enum:[Y, N]**
-    @SerializedName("goodsCd") val goodsCd: String, // 상품 코드**
-    @SerializedName("goodsDispNm") val goodsDispNm: String, // 상품명**
-    @SerializedName("goodsStat") val goodsStat: String, // 판매 상태, 주문 내역 쪽에서는 판매 종료도 다 조회 가능함 Enum:[판매중, 일시품절, 판매종료]
-    @SerializedName("slePrice") val slePrice: Int, // ($int32) 판매 가격**
-    @SerializedName("dcPrice") val dcPrice: Int, // ($int32) 할인 가격
-    @SerializedName("goodsGroupCd") val goodsGroupCd: String, // **상품 그룹 코드**
-    @SerializedName("imgPath") val imgPath: String, //  **이미지 경로**
-    @SerializedName("maxBuyPsblCntQty") val maxBuyPsblCntQty: Int, // ($int32) 최대 구매 수량**
-    @SerializedName("minBuyPsblCntQty") val minBuyPsblCntQty: Int, // ($int32) 최소 구매 수량**
-    @SerializedName("dcPercent") val dcPercent: Int?,
-    @SerializedName("adultAuthRequestYn") val adultAuthRequestYn: String,
-    @SerializedName("upperBadge") val upperBadge: UpperBadge?,
-    @SerializedName("lowerBadgeList") val lowerBadgeList: List<LowerBadge?>,
+    @SerializedName("goodsInfoSeq") val goodsSeq: Int, // 상품 번호
+    @SerializedName("dispYn") val optionYesNo: String, // Enum:[Y, N]
+    @SerializedName("goodsCd") val goodsCode: String, // 상품 코드
+    @SerializedName("goodsDispNm") val goodsName: String, // 상품명
+    @SerializedName("goodsStat") val goodsStatus: String, // 판매 상태, 주문 내역 쪽에서는 판매 종료도 다 조회 가능함 Enum:[판매중, 일시 품절, 판매 종료]
+    @SerializedName("slePrice") val salePrice: Int, // 판매 가격**
+    @SerializedName("dcPrice") val discountedPrice: Int, // 할인 가격
+    @SerializedName("goodsGroupCd") val goodsGroupCode: String, // 상품 그룹 코드
+    val imgPath: String, // 이미지 경로
+    @SerializedName("maxBuyPsblCntQty") val maxBuyPossibleCountQuantity: Int, // 최대 구매 수량**
+    @SerializedName("minBuyPsblCntQty") val minBuyPossibleCountQuantity: Int, // 최소 구매 수량**
+    @SerializedName("dcPercent") val discountedPercent: Int?,
+    @SerializedName("adultAuthRequestYn") val adultAuthRequestYesNo: String,
+    val upperBadge: UpperBadge?,
+    val lowerBadgeList: List<LowerBadge?>,
 )
 
 data class UpperBadge(
@@ -38,21 +38,21 @@ data class LowerBadge(
     val backgroundColor: String,
 )
 
-fun AppGoodsInfoDTO.toEntity(): SearchedGoodsModel {
-    return SearchedGoodsModel(
-        goodsInfoSeq = goodsInfoSeq,
-        dispYn = dispYn,
-        goodsCd = goodsCd,
-        goodsDispNm = goodsDispNm,
-        goodsStat = goodsStat,
-        slePrice = slePrice,
-        dcPrice = dcPrice,
-        goodsGroupCd = goodsGroupCd,
+fun AppGoodsInfoDTO.toEntity(): GoodsModel {
+    return GoodsModel(
+        goodsSeq = goodsSeq,
+        optionYesNo = optionYesNo,
+        goodsCode = goodsCode,
+        goodsName = goodsName,
+        goodsStatus = goodsStatus,
+        salePrice = salePrice,
+        discountedPrice = discountedPrice,
+        goodsGroupCode = goodsGroupCode,
         imgPath = imgPath,
-        maxBuyPsblCntQty = maxBuyPsblCntQty,
-        minBuyPsblCntQty = minBuyPsblCntQty,
-        dcPercent = dcPercent,
-        adultAuthRequestYn = adultAuthRequestYn,
+        maxBuyPossibleCountQuantity = maxBuyPossibleCountQuantity,
+        minBuyPossibleCountQuantity = minBuyPossibleCountQuantity,
+        discountedPercent = discountedPercent,
+        adultAuthRequestYesNo = adultAuthRequestYesNo,
         upperBadge = upperBadge,
         lowerBadgeList = lowerBadgeList,
     )
@@ -66,10 +66,10 @@ data class PaginationDTO(
 )
 
 data class PaginationItem(
-    val currentPage: Int = 0, // ($int32)*example:0* 조회된 현재 page.
-    val elementSizeOfPage: Int = 0, // ($int32) 요청 page당 element의 수
-    val totalElements: Int = 0, // ($int64) 전체 element의 수.
-    val totalPage: Int = 0 // ($int32) 전체 page수.
+    val currentPage: Int = 0, // 조회된 현재 page.
+    val elementSizeOfPage: Int = 0, // 요청 page 당 element의 수
+    val totalElements: Int = 0, // 전체 element의 수.
+    val totalPage: Int = 0 // 전체 page 수.
 )
 
 fun PaginationDTO.toEntity(): PaginationItem {
