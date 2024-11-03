@@ -1,11 +1,11 @@
 package com.hero.z_market.di
 
-import com.hero.z_market.domain.repository.ParentCategoryClassifiedRepository
-import com.hero.z_market.domain.repository.ParentCategoryClassifiedRepositoryImpl
-import com.hero.z_market.domain.repository.SearchedGoodsRepository
-import com.hero.z_market.domain.repository.SearchedGoodsRepositoryImpl
-import com.hero.z_market.domain.repository.SubCategoryClassifiedRepository
-import com.hero.z_market.domain.repository.SubCategoryClassifiedRepositoryImpl
+import com.hero.z_market.domain.repository.ChildCategoryRepository
+import com.hero.z_market.domain.repository.ChildCategoryRepositoryImpl
+import com.hero.z_market.domain.repository.GoodsRepository
+import com.hero.z_market.domain.repository.GoodsRepositoryImpl
+import com.hero.z_market.domain.repository.ParentCategoryRepository
+import com.hero.z_market.domain.repository.ParentCategoryRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -15,22 +15,21 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class RepositoryModule {
+    @Singleton
+    @Binds
+    abstract fun bindParentCategoryRepository(
+        parentCategoryRepositoryImpl: ParentCategoryRepositoryImpl
+    ): ParentCategoryRepository
 
     @Singleton
     @Binds
-    abstract fun bindCategoryClassifiedRepository(
-        parentCategoryClassifiedRepositoryImpl: ParentCategoryClassifiedRepositoryImpl
-    ): ParentCategoryClassifiedRepository
+    abstract fun bindChildCategoryRepository(
+        childCategoryRepositoryImpl: ChildCategoryRepositoryImpl
+    ): ChildCategoryRepository
 
     @Singleton
     @Binds
-    abstract fun bindSubCategoryClassifiedRepository(
-        subCategoryClassifiedRepositoryImpl: SubCategoryClassifiedRepositoryImpl
-    ): SubCategoryClassifiedRepository
-
-    @Singleton
-    @Binds
-    abstract fun bindCategoryItemListRepository(
-        searchedGoodsRepositoryImpl: SearchedGoodsRepositoryImpl
-    ): SearchedGoodsRepository
+    abstract fun bindGoodsRepository(
+        goodsRepositoryImpl: GoodsRepositoryImpl
+    ): GoodsRepository
 }
