@@ -1,8 +1,8 @@
 package com.hero.z_market.di
 
-import com.hero.z_market.api.ParentCategoryClassifiedService
-import com.hero.z_market.api.SearchedGoodsService
-import com.hero.z_market.api.SubCategoryClassifiedService
+import com.hero.z_market.api.ChildCategoryService
+import com.hero.z_market.api.GoodsService
+import com.hero.z_market.api.ParentCategoryService
 import com.hero.z_market.constants.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -24,7 +24,6 @@ object NetworkModule {
         loggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
 
         return OkHttpClient.Builder()
-//            .cookieJar(JavaNetCookieJar(CookieManager()))
             .addInterceptor(loggingInterceptor)
             .build()
     }
@@ -41,19 +40,19 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideParentCategoryClassifiedService(retrofit: Retrofit): ParentCategoryClassifiedService {
-        return retrofit.create(ParentCategoryClassifiedService::class.java)
+    fun provideParentCategoryService(retrofit: Retrofit): ParentCategoryService {
+        return retrofit.create(ParentCategoryService::class.java)
     }
 
     @Singleton
     @Provides
-    fun provideSubCategoryClassifiedService(retrofit: Retrofit): SubCategoryClassifiedService {
-        return retrofit.create(SubCategoryClassifiedService::class.java)
+    fun provideChildCategoryService(retrofit: Retrofit): ChildCategoryService {
+        return retrofit.create(ChildCategoryService::class.java)
     }
 
     @Singleton
     @Provides
-    fun provideSearchedGoodsService(retrofit: Retrofit): SearchedGoodsService {
-        return retrofit.create(SearchedGoodsService::class.java)
+    fun provideGoodsService(retrofit: Retrofit): GoodsService {
+        return retrofit.create(GoodsService::class.java)
     }
 }

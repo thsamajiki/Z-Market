@@ -1,7 +1,7 @@
 package com.hero.z_market.data.response
 
 import com.google.gson.annotations.SerializedName
-import com.hero.z_market.domain.model.ParentCategoryClassifiedModel
+import com.hero.z_market.domain.model.ParentCategoryModel
 
 data class ListResultAppDispClasInfoDTO(
     val data: List<AppDispClasInfoDTO>,
@@ -10,18 +10,18 @@ data class ListResultAppDispClasInfoDTO(
 
 
 data class AppDispClasInfoDTO(
-    @SerializedName("dispClasSeq") val dispClasSeq: Int, // 전시 카테고리 식별자
-    @SerializedName("dispClasNm") val dispClasNm: String, // 전시 카테고리 대분류명
-    @SerializedName("dispClasImgPath") val dispClasImgPath: String, // 전시 분류 이미지 경로
-    @SerializedName("dispClasCd") val dispClasCd: String, // 전시 분류 코드
+    @SerializedName("dispClasSeq") val parentCategorySeq: Int, // 부모 카테고리 식별자
+    @SerializedName("dispClasNm") val parentCategoryName: String, // 부모 카테고리 대분류명
+    @SerializedName("dispClasImgPath") val parentCategoryImgPath: String, // 부모 카테고리 이미지 경로
+    @SerializedName("dispClasCd") val parentCategoryCode: String, // 부모 카테고리 코드
 )
 
 
-fun AppDispClasInfoDTO.toEntity(): ParentCategoryClassifiedModel {
-    return ParentCategoryClassifiedModel(
-        dispClasSeq = dispClasSeq,
-        dispClasNm = dispClasNm,
-        dispClasImgPath = dispClasImgPath,
-        dispClasCd = dispClasCd
+fun AppDispClasInfoDTO.toEntity(): ParentCategoryModel {
+    return ParentCategoryModel(
+        parentCategorySeq = parentCategorySeq,
+        parentCategoryName = parentCategoryName,
+        parentCategoryImgPath = parentCategoryImgPath,
+        parentCategoryCode = parentCategoryCode
     )
 }
