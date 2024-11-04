@@ -16,7 +16,7 @@
         android:name=".ZMarketApp"
         tools:targetApi="31">
         <activity
-            android:name=".ui.ParentCategoryDetailActivity"
+            android:name=".ui.ChildCategoryGoodsListActivity"
             android:exported="false" />
         <activity
             android:name=".ui.MainActivity"
