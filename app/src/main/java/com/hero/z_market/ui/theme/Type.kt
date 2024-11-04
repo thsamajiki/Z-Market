@@ -19,6 +19,11 @@ val pretendards = FontFamily(
     Font(R.font.pretendard_black, FontWeight.Black),
 )
 
+val campton = FontFamily(
+    Font(R.font.campton_medium, FontWeight.Medium),
+    Font(R.font.campton_semibold, FontWeight.SemiBold),
+)
+
 // Set of Material typography styles to start with
 val Typography = Typography(
     bodyLarge = TextStyle(
