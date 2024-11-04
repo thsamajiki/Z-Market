@@ -1,8 +1,8 @@
 package com.hero.z_market.di
 
-import com.hero.z_market.api.ChildCategoryService
-import com.hero.z_market.api.GoodsService
-import com.hero.z_market.api.ParentCategoryService
+import com.hero.z_market.network.ChildCategoryService
+import com.hero.z_market.network.GoodsService
+import com.hero.z_market.network.ParentCategoryService
 import com.hero.z_market.constants.BASE_URL
 import dagger.Module
 import dagger.Provides
