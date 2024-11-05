@@ -3,14 +3,14 @@ package com.hero.z_market.di
 import com.hero.z_market.domain.repository.ChildCategoryRepository
 import com.hero.z_market.domain.repository.GoodsRepository
 import com.hero.z_market.domain.repository.ParentCategoryRepository
-import com.hero.z_market.domain.usecase.GetChildCategoryListUseCase
-import com.hero.z_market.domain.usecase.GetChildCategoryListUseCaseImpl
-import com.hero.z_market.domain.usecase.GetGoodsUseCase
-import com.hero.z_market.domain.usecase.GetGoodsUseCaseImpl
-import com.hero.z_market.domain.usecase.GetPaginationInfoUseCase
-import com.hero.z_market.domain.usecase.GetPaginationInfoUseCaseImpl
-import com.hero.z_market.domain.usecase.GetParentCategoryListUseCase
-import com.hero.z_market.domain.usecase.GetParentCategoryListUseCaseImpl
+import com.hero.z_market.domain.usecase.FetchChildCategoryListUseCase
+import com.hero.z_market.domain.usecase.FetchChildCategoryListUseCaseImpl
+import com.hero.z_market.domain.usecase.FetchGoodsUseCase
+import com.hero.z_market.domain.usecase.FetchGoodsUseCaseImpl
+import com.hero.z_market.domain.usecase.FetchPaginationInfoUseCase
+import com.hero.z_market.domain.usecase.FetchPaginationInfoUseCaseImpl
+import com.hero.z_market.domain.usecase.FetchParentCategoryListUseCase
+import com.hero.z_market.domain.usecase.FetchParentCategoryListUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -22,25 +22,25 @@ import javax.inject.Singleton
 object UseCaseModule {
     @Provides
     @Singleton
-    fun provideParentCategoryUseCase(
+    fun provideFetchParentCategoryListUseCase(
         parentCategoryRepository: ParentCategoryRepository
-    ): GetParentCategoryListUseCase = GetParentCategoryListUseCaseImpl(parentCategoryRepository)
+    ): FetchParentCategoryListUseCase = FetchParentCategoryListUseCaseImpl(parentCategoryRepository)
 
     @Provides
     @Singleton
-    fun provideChildCategoryUseCase(
+    fun provideFetchGetChildCategoryListUseCase(
         childCategoryRepository: ChildCategoryRepository
-    ): GetChildCategoryListUseCase = GetChildCategoryListUseCaseImpl(childCategoryRepository)
+    ): FetchChildCategoryListUseCase = FetchChildCategoryListUseCaseImpl(childCategoryRepository)
 
     @Provides
     @Singleton
-    fun provideGoodsUseCase(
+    fun provideFetchGoodsUseCase(
         goodsRepository: GoodsRepository
-    ): GetGoodsUseCase = GetGoodsUseCaseImpl(goodsRepository)
+    ): FetchGoodsUseCase = FetchGoodsUseCaseImpl(goodsRepository)
 
     @Provides
     @Singleton
-    fun providePaginationInfoUseCase(
+    fun provideFetchPaginationInfoUseCase(
         goodsRepository: GoodsRepository
-    ): GetPaginationInfoUseCase = GetPaginationInfoUseCaseImpl(goodsRepository)
+    ): FetchPaginationInfoUseCase = FetchPaginationInfoUseCaseImpl(goodsRepository)
 }
