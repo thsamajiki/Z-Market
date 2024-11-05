@@ -8,7 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
-import com.hero.z_market.ui.screen.parentCategory.MainScreen
+import com.hero.z_market.ui.screen.MainScreen
 import com.hero.z_market.ui.theme.ZMarketTheme
 import com.hero.z_market.ui.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
