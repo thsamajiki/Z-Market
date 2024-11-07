@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.hero.z_market.domain.model.ParentCategoryModel
 import com.hero.z_market.domain.usecase.FetchParentCategoryListUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -35,7 +36,7 @@ class MainViewModel @Inject constructor(
     }
 
     fun fetchParentCategoryList() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             kotlin.runCatching {
                 fetchParentCategoryListUseCase.invoke()
             }
