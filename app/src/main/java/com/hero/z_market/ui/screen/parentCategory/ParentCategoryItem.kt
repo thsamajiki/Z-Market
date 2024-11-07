@@ -71,7 +71,7 @@ fun ParentCategoryItem(
                     modifier = Modifier
                         .padding(2.dp)
                         .align(Alignment.CenterHorizontally),
-                    fontFamily = FontFamily(Typeface.MONOSPACE),
+                    fontFamily = FontFamily(Typeface.SANS_SERIF),
                     style = MaterialTheme.typography.h2,
                     textAlign = TextAlign.Center,
                     color = Color.Gray,

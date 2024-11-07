@@ -65,7 +65,7 @@ fun MainScreen(mainViewModel: MainViewModel) {
                 modifier = Modifier.padding(20.dp, 50.dp, 0.dp, 0.dp),
                 text = "기획전 / 이벤트",
                 fontSize = 15.sp,
-                fontFamily = FontFamily(Typeface.MONOSPACE),
+                fontFamily = FontFamily(Typeface.SANS_SERIF),
                 fontWeight = FontWeight.Bold,
                 style = MaterialTheme.typography.h2,
                 color = Color.Black,
