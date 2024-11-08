@@ -18,6 +18,8 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.hero.z_market.ui.ChildCategoryGoodsListActivity
 import com.hero.z_market.ui.MainActivity.Companion.PARENT_CATEGORY
@@ -39,6 +41,22 @@ fun MainScreen(mainViewModel: MainViewModel) {
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
+            NavHost(
+                navController = navController,
+                startDestination = BottomNavItem.Home.screenRoute // 기본 시작 경로 설정
+            ) {
+                composable(BottomNavItem.Categories.screenRoute) {
+                }
+                composable(BottomNavItem.Favorites.screenRoute) {
+                }
+                composable(BottomNavItem.Home.screenRoute) {
+                }
+                composable(BottomNavItem.Cart.screenRoute) {
+                }
+                composable(BottomNavItem.MyInfo.screenRoute) {
+                }
+            }
+
             when (uiState) {
                 is MainViewModel.UiState.FetchParentCategoryListSuccess -> {
                     ParentCategoryListScreen(

@@ -1,5 +1,6 @@
 package com.hero.z_market.ui.screen
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.BottomNavigation
 import androidx.compose.material.BottomNavigationItem
@@ -10,6 +11,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -31,6 +33,8 @@ fun BottomNavigationBar(navController: NavHostController) {
         BottomNavItem.Cart,
         BottomNavItem.MyInfo
     )
+    val context = LocalContext.current
+
     BottomNavigation(
         backgroundColor = White,
         contentColor = Color(0xFF3F414E)
@@ -72,11 +76,17 @@ fun BottomNavigationBar(navController: NavHostController) {
                 selectedContentColor = selectedMenu,
                 unselectedContentColor = unselectedMenu,
                 selected = currentRoute == item.screenRoute,
-                alwaysShowLabel = currentRoute == item.screenRoute,
+                alwaysShowLabel = true,
                 onClick = {
+                    if (item != BottomNavItem.Home) {
+                        Toast.makeText(context, "${item.title} 클릭됨", Toast.LENGTH_SHORT).show()
+                    }
+
                     navController.navigate(item.screenRoute) {
-                        navController.graph.startDestinationRoute?.let {
-                            popUpTo(it) { saveState = true }
+                        val startDestination = navController.graph.startDestinationRoute
+
+                        if (startDestination != null) {
+                            popUpTo(startDestination) { saveState = true }
                         }
 
                         launchSingleTop = true
