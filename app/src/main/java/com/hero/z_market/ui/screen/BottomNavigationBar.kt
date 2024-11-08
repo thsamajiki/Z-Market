@@ -76,7 +76,7 @@ fun BottomNavigationBar(navController: NavHostController) {
                 selectedContentColor = selectedMenu,
                 unselectedContentColor = unselectedMenu,
                 selected = currentRoute == item.screenRoute,
-                alwaysShowLabel = currentRoute == item.screenRoute,
+                alwaysShowLabel = true,
                 onClick = {
                     if (item != BottomNavItem.Home) {
                         Toast.makeText(context, "${item.title} 클릭됨", Toast.LENGTH_SHORT).show()
