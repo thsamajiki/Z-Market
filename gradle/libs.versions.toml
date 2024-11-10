@@ -21,7 +21,7 @@ ksp = "1.9.22-1.0.16"
 lifecycle = "2.8.7"
 retrofit = "2.9.0"
 okhttp = "4.11.0"
-glide = "4.14.2"
+glide = "4.16.0"
 glide-compose = "1.0.0-beta01"
 gson = "2.10.1"
 
