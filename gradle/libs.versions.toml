@@ -94,6 +94,8 @@ androidApplication = { id = "com.android.application", version.ref = "agp" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 
+compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+
 # Ksp
 devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 
@@ -112,9 +114,6 @@ coroutines = [
     "coroutines-android",
     "coroutines-play-services",
     "coroutines-test"
-]
-glide = [
-    "glide", "glide-compiler"
 ]
 retrofit = [
     "retrofit",
