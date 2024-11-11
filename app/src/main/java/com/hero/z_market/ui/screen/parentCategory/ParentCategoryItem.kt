@@ -10,9 +10,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -72,7 +72,7 @@ fun ParentCategoryItem(
                         .padding(2.dp)
                         .align(Alignment.CenterHorizontally),
                     fontFamily = FontFamily(Typeface.SANS_SERIF),
-                    style = MaterialTheme.typography.h2,
+                    style = MaterialTheme.typography.bodyMedium,
                     textAlign = TextAlign.Center,
                     color = Color.Gray,
                     fontSize = 12.sp,
@@ -88,7 +88,7 @@ fun ParentCategoryItem(
 @Preview(showBackground = true)
 fun ParentCategoryItemPreview(
     @PreviewParameter(ParentCategoryPreviewParameterProvider::class, limit = 5)
-    parentCategory: ParentCategoryModel
+    parentCategory: ParentCategoryModel,
 ) {
     ZMarketTheme {
         ParentCategoryItem(
