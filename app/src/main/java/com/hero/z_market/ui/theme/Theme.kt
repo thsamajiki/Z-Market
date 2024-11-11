@@ -3,8 +3,6 @@ package com.hero.z_market.ui.theme
 import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.material.darkColors
-import androidx.compose.material.lightColors
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
@@ -18,26 +16,26 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
-private val DarkColorPalette = darkColors(
+private val DarkColorPalette = darkColorScheme(
     primary = Purple200,
-    primaryVariant = Purple700,
+    primaryContainer = Purple700,
     secondary = Teal200
 )
 
-private val LightColorPalette = lightColors(
+private val LightColorPalette = lightColorScheme(
     primary = Purple500,
-    primaryVariant = Purple700,
+    primaryContainer = Purple700,
     secondary = Teal200
 )
 
-private val LightColorPaletteCustom = lightColors(
+private val LightColorPaletteCustom = lightColorScheme(
     surface = Blue,
     onSurface = Color.White,
     primary = LightBlue,
     onPrimary = Navy
 )
 
-private val DarkColorPaletteCustom = darkColors(
+private val DarkColorPaletteCustom = darkColorScheme(
     surface = Blue,
     onSurface = Navy,
     primary = Navy,
