@@ -70,6 +70,8 @@ fun GoodsSortChip(
             selectedContainerColor = Transparent,
         ),
         border = FilterChipDefaults.filterChipBorder(
+            enabled = true,
+            selected = isSelected,
             borderColor = Transparent,
             selectedBorderColor = Transparent,
             disabledBorderColor = Transparent,

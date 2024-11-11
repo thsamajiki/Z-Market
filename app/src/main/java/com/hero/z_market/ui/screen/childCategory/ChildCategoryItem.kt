@@ -5,9 +5,9 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -52,7 +52,7 @@ fun ChildCategoryItem(
                 .align(Alignment.Start),
             fontFamily = FontFamily(Typeface.SANS_SERIF),
             fontWeight = if (isSelected) FontWeight.SemiBold else FontWeight.Normal,
-            style = MaterialTheme.typography.h2,
+            style = MaterialTheme.typography.bodyMedium,
             textAlign = TextAlign.Start,
             color = if (isSelected) Black else Gray,
             fontSize = 12.sp,
