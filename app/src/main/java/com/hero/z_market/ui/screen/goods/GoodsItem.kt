@@ -10,7 +10,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
@@ -105,7 +105,7 @@ fun GoodsItem(
             else Modifier.padding(start = 9.dp, top = 2.dp)
                 .align(Alignment.Start),
             fontFamily = FontFamily(Typeface.SANS_SERIF),
-            style = MaterialTheme.typography.h2,
+            style = MaterialTheme.typography.bodyMedium,
             textAlign = TextAlign.Center,
             color = Black,
             fontSize = 13.sp,
@@ -121,7 +121,7 @@ fun GoodsItem(
                 textDecoration = if (discountedPercent != 0) TextDecoration.LineThrough else TextDecoration.None,
                 modifier = Modifier.padding(2.dp),
                 fontFamily = FontFamily(Typeface.SANS_SERIF),
-                style = MaterialTheme.typography.h2,
+                style = MaterialTheme.typography.bodyMedium,
                 textAlign = TextAlign.Center,
                 color = Gray,
                 fontSize = 11.sp,
@@ -132,7 +132,7 @@ fun GoodsItem(
                 text = "원",
                 modifier = Modifier.padding(top = 2.dp),
                 fontFamily = FontFamily(Typeface.SANS_SERIF),
-                style = MaterialTheme.typography.h2,
+                style = MaterialTheme.typography.bodyMedium,
                 textAlign = TextAlign.Center,
                 color = Gray,
                 fontSize = 11.sp,
@@ -149,7 +149,7 @@ fun GoodsItem(
                     .visibility(isVisible.value),
                 fontFamily = FontFamily(Typeface.SANS_SERIF),
                 fontWeight = FontWeight.SemiBold,
-                style = MaterialTheme.typography.h2,
+                style = MaterialTheme.typography.bodyMedium,
                 textAlign = TextAlign.Center,
                 color = Red,
                 fontSize = 13.sp,
@@ -162,7 +162,7 @@ fun GoodsItem(
                     .visibility(isVisible.value),
                 fontFamily = FontFamily(Typeface.SANS_SERIF),
                 fontWeight = FontWeight.SemiBold,
-                style = MaterialTheme.typography.h2,
+                style = MaterialTheme.typography.bodyMedium,
                 textAlign = TextAlign.Center,
                 color = Red,
                 fontSize = 13.sp,
@@ -174,7 +174,7 @@ fun GoodsItem(
                 modifier = if (isVisible.value) Modifier.padding(start = 5.dp, top = 2.dp) else Modifier.padding(top = 2.dp),
                 fontFamily = FontFamily(Typeface.SANS_SERIF),
                 fontWeight = FontWeight.SemiBold,
-                style = MaterialTheme.typography.h2,
+                style = MaterialTheme.typography.bodyMedium,
                 textAlign = TextAlign.Center,
                 color = Black,
                 fontSize = 13.sp,
@@ -186,7 +186,7 @@ fun GoodsItem(
                 modifier = Modifier.padding(vertical = 2.dp),
                 fontFamily = FontFamily(Typeface.SANS_SERIF),
                 fontWeight = FontWeight.SemiBold,
-                style = MaterialTheme.typography.h2,
+                style = MaterialTheme.typography.bodyMedium,
                 textAlign = TextAlign.Center,
                 color = Black,
                 fontSize = 13.sp,
