@@ -5,8 +5,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.hero.z_market.ui.screen.MainScreen
 import com.hero.z_market.ui.theme.ZMarketTheme
@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
             ZMarketTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background
+                    color = MaterialTheme.colorScheme.background
                 ) {
                     val vm: MainViewModel by viewModels()
                     MainScreen(vm)
