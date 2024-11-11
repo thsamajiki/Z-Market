@@ -3,7 +3,7 @@ package com.hero.z_market.ui.screen.childCategory
 import android.graphics.Typeface
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.MaterialTheme
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -26,7 +26,7 @@ fun PaginationInfoScreen(
             fontSize = 13.sp,
             fontFamily = FontFamily(Typeface.SANS_SERIF),
             fontWeight = FontWeight.SemiBold,
-            style = MaterialTheme.typography.h2,
+            style = MaterialTheme.typography.bodyMedium,
             color = Black,
         )
         Text(
@@ -35,7 +35,7 @@ fun PaginationInfoScreen(
             fontSize = 13.sp,
             fontFamily = FontFamily(Typeface.SANS_SERIF),
             fontWeight = FontWeight.SemiBold,
-            style = MaterialTheme.typography.h2,
+            style = MaterialTheme.typography.bodyMedium,
             color = Black,
         )
     }
