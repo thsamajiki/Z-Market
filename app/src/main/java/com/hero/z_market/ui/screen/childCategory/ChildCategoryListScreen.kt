@@ -1,7 +1,7 @@
 package com.hero.z_market.ui.screen.childCategory
 
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.runtime.Composable
@@ -28,9 +28,7 @@ fun ChildCategoryListScreen(
 
     LazyVerticalGrid(
         columns = GridCells.Fixed(3),
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 10.dp),
+        modifier = Modifier.fillMaxWidth().heightIn(max = 400.dp),
     ) {
         items(count = childCategoryList.size) { index ->
             val item = childCategoryList[index]
