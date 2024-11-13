@@ -1,6 +1,7 @@
 package com.hero.z_market.ui.screen.goods
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -24,7 +25,7 @@ fun GoodsListScreen(
 ) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxWidth().heightIn(max = 550.dp)
     ) {
         items(count = goods.itemCount) { index ->
             val item = goods[index]
