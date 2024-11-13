@@ -46,7 +46,7 @@ fun ChildCategoryGoodsListTopAppBar(
             IconButton(onClick = onBackClick) {
                 Icon(
                     imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                    contentDescription = "Back to MainActivity"
+                    contentDescription = "Back to MainScreen"
                 )
             }
         },
