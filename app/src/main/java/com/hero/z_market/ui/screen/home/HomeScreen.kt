@@ -8,6 +8,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
@@ -24,14 +25,16 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.hero.z_market.domain.model.ParentCategoryModel
 import com.hero.z_market.ui.ChildCategoryGoodsListActivity
 import com.hero.z_market.ui.MainActivity.Companion.PARENT_CATEGORY
 import com.hero.z_market.ui.screen.parentCategory.ParentCategoryListScreen
+import com.hero.z_market.ui.state.UiState
 import com.hero.z_market.ui.viewmodel.MainViewModel
 
 @Composable
 fun HomeScreen(vm: MainViewModel) {
-    val uiState by vm.uiState.collectAsState()
+    val uiState by vm.fetchParentCategoryListUiState.collectAsState()
     val context = LocalContext.current
 
     val topBarHeight = 48.dp
@@ -49,6 +52,10 @@ fun HomeScreen(vm: MainViewModel) {
         }
     }
 
+    LaunchedEffect(Unit) {
+        vm.fetchParentCategoryList()
+    }
+
     LazyColumn(
         modifier = Modifier
             .fillMaxSize()
@@ -56,9 +63,9 @@ fun HomeScreen(vm: MainViewModel) {
     ) {
         item {
             when (uiState) {
-                is MainViewModel.UiState.FetchParentCategoryListSuccess -> {
+                is UiState.Success<List<ParentCategoryModel>> -> {
                     ParentCategoryListScreen(
-                        parentCategoryList = (uiState as MainViewModel.UiState.FetchParentCategoryListSuccess).value,
+                        parentCategoryList = (uiState as UiState.Success<List<ParentCategoryModel>>).data,
                         onClicked = { parentCategory ->
                             val intent =
                                 ChildCategoryGoodsListActivity.getIntent(context, parentCategory)
@@ -70,11 +77,11 @@ fun HomeScreen(vm: MainViewModel) {
                     )
                 }
 
-                is MainViewModel.UiState.FetchParentCategoryListFailed -> {
+                is UiState.Failed -> {
                     Toast.makeText(context, "데이터를 불러오는 데 실패했습니다.", Toast.LENGTH_SHORT).show()
                 }
 
-                is MainViewModel.UiState.Idle -> {}
+                is UiState.Idle -> {}
             }
         }
 
