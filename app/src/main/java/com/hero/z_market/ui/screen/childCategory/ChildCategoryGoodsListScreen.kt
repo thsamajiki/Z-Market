@@ -1,6 +1,7 @@
 package com.hero.z_market.ui.screen.childCategory
 
 import android.app.Activity
+import android.widget.Toast
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -23,10 +24,12 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.hero.z_market.data.response.PaginationItem
 import com.hero.z_market.domain.model.ChildCategoryModel
 import com.hero.z_market.domain.model.ParentCategoryModel
 import com.hero.z_market.ui.screen.goods.GoodsListScreen
 import com.hero.z_market.ui.screen.goods.GoodsSortChipGroupScreen
+import com.hero.z_market.ui.state.UiState
 import com.hero.z_market.ui.viewmodel.ChildCategoryGoodsListViewModel
 
 @OptIn(ExperimentalMaterialApi::class, ExperimentalFoundationApi::class)
@@ -35,6 +38,9 @@ fun ChildCategoryGoodsListScreen(
     vm: ChildCategoryGoodsListViewModel,
     parentCategory: ParentCategoryModel?,
 ) {
+    val fetchChildCategoryListUiState by vm.fetchChildCategoryListUiState.collectAsState()
+    val fetchPaginationUiState by vm.fetchPaginationUiState.collectAsState()
+
     val context = LocalContext.current
     var selectedChildCategory = vm.selectedChildCategory.collectAsState()
     val childCategoryList by vm.childCategoryList.collectAsState()
@@ -102,28 +108,47 @@ fun ChildCategoryGoodsListScreen(
                 addAll(childCategoryList)
             }
             item {
-                ChildCategoryListScreen(
-                    childCategoryList = allChildCategories,
-                    selectedCategory = selectedChildCategory.value,
-                    onClicked = { childCategory ->
-                        val parentCategorySeq = childCategory.parentCategorySeq
-                        val childCategorySeq = childCategory.childCategorySeq
+                when(fetchChildCategoryListUiState) {
+                    is UiState.Success<List<ChildCategoryModel>> -> {
+                        ChildCategoryListScreen(
+                            childCategoryList = allChildCategories,
+                            selectedCategory = selectedChildCategory.value,
+                            onClicked = { childCategory ->
+                                val parentCategorySeq = childCategory.parentCategorySeq
+                                val childCategorySeq = childCategory.childCategorySeq
 
-                        vm.setParentCategorySeqValue(parentCategorySeq)
-                        vm.setChildCategorySeqValue(childCategorySeq)
-                        vm.fetchPaginationInfo(
-                            parentCategorySeq = parentCategorySeq,
-                            childCategorySeq = childCategorySeq,
-                            0, 20,
-                            vm.sortValue.value
+                                vm.setParentCategorySeqValue(parentCategorySeq)
+                                vm.setChildCategorySeqValue(childCategorySeq)
+                                vm.fetchPaginationInfo(
+                                    parentCategorySeq = parentCategorySeq,
+                                    childCategorySeq = childCategorySeq,
+                                    0, 20,
+                                    vm.sortValue.value
+                                )
+                            },
                         )
-                    },
-                )
+                    }
+                    is UiState.Failed -> {
+                        Toast.makeText(context, "분류 카테고리를 불러올 수 없습니다.", Toast.LENGTH_SHORT).show()
+                    }
+                    is UiState.Idle -> {
+                    }
+                }
             }
 
             stickyHeader {
                 Column {
-                    PaginationInfoScreen(pagination)
+                    when(fetchPaginationUiState) {
+                        is UiState.Success<PaginationItem> -> {
+                            PaginationInfoScreen(pagination)
+                        }
+                        is UiState.Failed -> {
+                            Toast.makeText(context, "페이지 수를 불러올 수 없습니다.", Toast.LENGTH_SHORT).show()
+                        }
+                        is UiState.Idle -> {
+                        }
+                    }
+
                     GoodsSortChipGroupScreen(vm)
                 }
             }

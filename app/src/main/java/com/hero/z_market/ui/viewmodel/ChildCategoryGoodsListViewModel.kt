@@ -11,6 +11,7 @@ import com.hero.z_market.domain.model.GoodsModel
 import com.hero.z_market.domain.usecase.FetchChildCategoryListUseCase
 import com.hero.z_market.domain.usecase.FetchGoodsUseCase
 import com.hero.z_market.domain.usecase.FetchPaginationInfoUseCase
+import com.hero.z_market.ui.state.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -27,6 +28,14 @@ class ChildCategoryGoodsListViewModel @Inject constructor(
     private val fetchGoodsUseCase: FetchGoodsUseCase,
     private val fetchPaginationInfoUseCase: FetchPaginationInfoUseCase,
 ) : ViewModel() {
+    private val _fetchChildCategoryListUiState = MutableStateFlow<UiState<List<ChildCategoryModel>>>(UiState.Idle)
+    val fetchChildCategoryListUiState: StateFlow<UiState<List<ChildCategoryModel>>>
+        get() = _fetchChildCategoryListUiState.asStateFlow()
+
+    private val _fetchPaginationUiState = MutableStateFlow<UiState<PaginationItem>>(UiState.Idle)
+    val fetchPaginationUiState: StateFlow<UiState<PaginationItem>>
+        get() = _fetchPaginationUiState.asStateFlow()
+
     private val _childCategoryList = MutableStateFlow<List<ChildCategoryModel>>(emptyList())
     val childCategoryList: StateFlow<List<ChildCategoryModel>>
         get() = _childCategoryList
@@ -97,9 +106,17 @@ class ChildCategoryGoodsListViewModel @Inject constructor(
 
     fun fetchChildCategoryList(parentCategorySeq: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            fetchChildCategoryListUseCase.invoke(parentCategorySeq)
-                .collectLatest { childCategory ->
-                    _childCategoryList.value = childCategory
+            runCatching {
+                fetchChildCategoryListUseCase.invoke(parentCategorySeq)
+                    .collectLatest { childCategory ->
+                        _childCategoryList.value = childCategory
+                    }
+            }
+                .onSuccess {
+                    _fetchChildCategoryListUiState.value = UiState.Success(childCategoryList.value)
+                }
+                .onFailure {
+                    _fetchChildCategoryListUiState.value = UiState.Failed("ChildCategoryList Failed")
                 }
         }
     }
@@ -124,10 +141,24 @@ class ChildCategoryGoodsListViewModel @Inject constructor(
                             size: Int,
                             query: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            fetchPaginationInfoUseCase.invoke(parentCategorySeq, childCategorySeq, page, size, query)
-                .collectLatest { pagination ->
-                _paginationInfo.value = pagination
+            runCatching {
+                fetchPaginationInfoUseCase.invoke(
+                    parentCategorySeq,
+                    childCategorySeq,
+                    page,
+                    size,
+                    query
+                )
+                    .collectLatest { pagination ->
+                        _paginationInfo.value = pagination
+                    }
             }
+                .onSuccess {
+                    _fetchPaginationUiState.value = UiState.Success(paginationInfo.value)
+                }
+                .onFailure {
+                    _fetchPaginationUiState.value = UiState.Failed("PaginationInfo Failed")
+                }
         }
     }
 }
