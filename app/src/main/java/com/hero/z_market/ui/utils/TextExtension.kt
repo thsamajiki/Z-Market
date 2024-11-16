@@ -1,4 +1,4 @@
-package com.hero.z_market.utils
+package com.hero.z_market.ui.utils
 
 import androidx.compose.foundation.layout.size
 import androidx.compose.ui.Modifier
