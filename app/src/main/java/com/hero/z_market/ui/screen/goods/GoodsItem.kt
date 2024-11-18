@@ -113,12 +113,12 @@ fun GoodsItem(
             maxLines = 1,
         )
         Row(
-            modifier = Modifier.padding(start = 5.dp, top = 2.dp)
+            modifier = Modifier.padding(start = 7.dp, top = 5.dp)
                 .visibility(isVisible.value),
         ) {
             Text(
                 text = formatWithComma(goods.salePrice).toString(),
-                modifier = Modifier.alignByBaseline().padding(2.dp),
+                modifier = Modifier.alignByBaseline().padding(end = 1.dp),
                 textDecoration = if (discountedPercent != 0) TextDecoration.LineThrough else TextDecoration.None,
                 fontFamily = FontFamily(Typeface.SANS_SERIF),
                 style = MaterialTheme.typography.bodyMedium,
@@ -130,7 +130,7 @@ fun GoodsItem(
             )
             Text(
                 text = "원",
-                modifier = Modifier.alignByBaseline().padding(top = 2.dp),
+                modifier = Modifier.alignByBaseline(),
                 fontFamily = FontFamily(Typeface.SANS_SERIF),
                 style = MaterialTheme.typography.bodyMedium,
                 textAlign = TextAlign.Center,
@@ -141,7 +141,7 @@ fun GoodsItem(
             )
         }
         Row(
-            modifier = Modifier.padding(start = 5.dp, top = 2.dp)
+            modifier = Modifier.padding(start = 7.dp, top = 2.dp)
         ) {
             Text(
                 text = discountedPercent.toString(),
@@ -171,7 +171,7 @@ fun GoodsItem(
                 text = formatWithComma(goods.discountedPrice).toString(),
                 modifier =
                 if (isVisible.value) Modifier.alignByBaseline().padding(start = 5.dp)
-                else Modifier.alignByBaseline().padding(top = 2.dp),
+                else Modifier.alignByBaseline().padding(start = 4.dp),
                 fontFamily = FontFamily(Typeface.SANS_SERIF),
                 fontWeight = FontWeight.SemiBold,
                 style = MaterialTheme.typography.bodyMedium,
