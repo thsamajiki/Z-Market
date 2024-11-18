@@ -33,7 +33,7 @@ fun PaginationInfoScreen(
             color = Black,
         )
         Text(
-            modifier = Modifier.alignByBaseline().padding(start = 0.5.dp),
+            modifier = Modifier.alignByBaseline(),
             text = "건의 검색결과",
             fontSize = 13.sp,
             fontFamily = FontFamily(Typeface.SANS_SERIF),
