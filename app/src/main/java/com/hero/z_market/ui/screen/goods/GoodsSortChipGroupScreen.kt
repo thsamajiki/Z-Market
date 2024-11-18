@@ -17,7 +17,7 @@ fun GoodsSortChipGroupScreen(
     var selectedChipIndex = remember { mutableIntStateOf(0) } // 선택된 Chip의 인덱스 (-1은 아무것도 선택되지 않음을 의미)
 
     Row(
-        modifier = Modifier.padding(start = 10.dp, top = 10.dp),
+        modifier = Modifier.padding(start = 10.dp),
     ) {
         GoodsSortChip(
             vm,
