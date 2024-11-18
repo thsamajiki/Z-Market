@@ -45,7 +45,7 @@ import com.hero.z_market.domain.model.GoodsModel
 import com.hero.z_market.ui.preview.goods.GoodsPreviewParameterProvider
 import com.hero.z_market.ui.theme.ZMarketTheme
 import com.hero.z_market.utils.FormatUtil.formatWithComma
-import com.hero.z_market.utils.TextExtension.visibility
+import com.hero.z_market.ui.utils.TextExtension.visibility
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
