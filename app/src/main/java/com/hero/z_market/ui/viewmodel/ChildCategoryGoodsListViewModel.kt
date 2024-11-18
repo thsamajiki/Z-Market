@@ -36,6 +36,10 @@ class ChildCategoryGoodsListViewModel @Inject constructor(
     val fetchPaginationUiState: StateFlow<UiState<PaginationItem>>
         get() = _fetchPaginationUiState.asStateFlow()
 
+    private val _fetchGoodsListUiState = MutableStateFlow<UiState<PagingData<GoodsModel>>>(UiState.Idle)
+    val fetchGoodsListUiState: StateFlow<UiState<PagingData<GoodsModel>>>
+        get() = _fetchGoodsListUiState.asStateFlow()
+
     private val _childCategoryList = MutableStateFlow<List<ChildCategoryModel>>(emptyList())
     val childCategoryList: StateFlow<List<ChildCategoryModel>>
         get() = _childCategoryList
@@ -127,10 +131,18 @@ class ChildCategoryGoodsListViewModel @Inject constructor(
                        size: Int,
                        query: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            fetchGoodsUseCase.invoke(parentCategorySeq, childCategorySeq, page, size, query)
-                .cachedIn(viewModelScope)
-                .collectLatest { pagingData ->
-                    _goods.value = pagingData
+            runCatching {
+                fetchGoodsUseCase.invoke(parentCategorySeq, childCategorySeq, page, size, query)
+                    .cachedIn(viewModelScope)
+            }
+                .onSuccess { flow ->
+                    flow.collectLatest { pagingData ->
+                        _fetchGoodsListUiState.value = UiState.Success(pagingData)
+                        _goods.value = pagingData
+                    }
+                }
+                .onFailure {
+                    _fetchGoodsListUiState.value = UiState.Failed("GoodsList Failed")
                 }
         }
     }
