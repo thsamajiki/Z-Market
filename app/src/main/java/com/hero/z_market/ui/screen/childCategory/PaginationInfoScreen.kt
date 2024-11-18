@@ -10,16 +10,18 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.hero.z_market.data.response.PaginationItem
+import com.hero.z_market.ui.theme.ZMarketTheme
 
 @Composable
 fun PaginationInfoScreen(
     pagination: PaginationItem,
 ) {
     Row(
-        modifier = Modifier.padding(start = 20.dp, top = 30.dp),
+        modifier = Modifier.padding(start = 20.dp),
     ) {
         Text(
             text = pagination.totalElements.toString(),
@@ -38,5 +40,13 @@ fun PaginationInfoScreen(
             style = MaterialTheme.typography.bodyMedium,
             color = Black,
         )
+    }
+}
+
+@Composable
+@Preview(showBackground = true)
+fun PaginationInfoScreenPreview() {
+    ZMarketTheme {
+        PaginationInfoScreen(PaginationItem(0, 20, 20, 1))
     }
 }
