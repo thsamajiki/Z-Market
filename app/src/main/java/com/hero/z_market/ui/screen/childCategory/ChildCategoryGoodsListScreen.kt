@@ -23,9 +23,11 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
+import androidx.paging.PagingData
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.hero.z_market.data.response.PaginationItem
 import com.hero.z_market.domain.model.ChildCategoryModel
+import com.hero.z_market.domain.model.GoodsModel
 import com.hero.z_market.domain.model.ParentCategoryModel
 import com.hero.z_market.ui.screen.goods.GoodsListScreen
 import com.hero.z_market.ui.screen.goods.GoodsSortChipGroupScreen
@@ -40,6 +42,7 @@ fun ChildCategoryGoodsListScreen(
 ) {
     val fetchChildCategoryListUiState by vm.fetchChildCategoryListUiState.collectAsState()
     val fetchPaginationUiState by vm.fetchPaginationUiState.collectAsState()
+    val fetchGoodsListUiState by vm.fetchGoodsListUiState.collectAsState()
 
     val context = LocalContext.current
     var selectedChildCategory = vm.selectedChildCategory.collectAsState()
@@ -131,8 +134,7 @@ fun ChildCategoryGoodsListScreen(
                     is UiState.Failed -> {
                         Toast.makeText(context, "분류 카테고리를 불러올 수 없습니다.", Toast.LENGTH_SHORT).show()
                     }
-                    is UiState.Idle -> {
-                    }
+                    is UiState.Idle -> {}
                 }
             }
 
@@ -154,10 +156,18 @@ fun ChildCategoryGoodsListScreen(
             }
 
             item {
-                GoodsListScreen(
-                    goods = vm.goods.collectAsLazyPagingItems(),
-                    onClicked = {}
-                )
+                when (fetchGoodsListUiState) {
+                    is UiState.Success<PagingData<GoodsModel>> -> {
+                        GoodsListScreen(
+                            goods = vm.goods.collectAsLazyPagingItems(),
+                            onClicked = {}
+                        )
+                    }
+                    is UiState.Failed -> {
+                        Toast.makeText(context, "상품 목록을 불러올 수 없습니다.", Toast.LENGTH_SHORT).show()
+                    }
+                    is UiState.Idle -> {}
+                }
             }
         }
     }
