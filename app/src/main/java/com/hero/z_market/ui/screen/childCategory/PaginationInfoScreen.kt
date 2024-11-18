@@ -24,6 +24,7 @@ fun PaginationInfoScreen(
         modifier = Modifier.padding(start = 20.dp),
     ) {
         Text(
+            modifier = Modifier.alignByBaseline(),
             text = pagination.totalElements.toString(),
             fontSize = 13.sp,
             fontFamily = FontFamily(Typeface.SANS_SERIF),
@@ -32,7 +33,7 @@ fun PaginationInfoScreen(
             color = Black,
         )
         Text(
-            modifier = Modifier.padding(start = 0.5.dp),
+            modifier = Modifier.alignByBaseline().padding(start = 0.5.dp),
             text = "건의 검색결과",
             fontSize = 13.sp,
             fontFamily = FontFamily(Typeface.SANS_SERIF),

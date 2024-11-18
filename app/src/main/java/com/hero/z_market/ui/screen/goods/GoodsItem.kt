@@ -10,11 +10,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -44,8 +44,8 @@ import com.hero.z_market.constants.BASE_IMG_URL
 import com.hero.z_market.domain.model.GoodsModel
 import com.hero.z_market.ui.preview.goods.GoodsPreviewParameterProvider
 import com.hero.z_market.ui.theme.ZMarketTheme
-import com.hero.z_market.utils.FormatUtil.formatWithComma
 import com.hero.z_market.ui.utils.TextExtension.visibility
+import com.hero.z_market.utils.FormatUtil.formatWithComma
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
@@ -113,13 +113,13 @@ fun GoodsItem(
             maxLines = 1,
         )
         Row(
-            modifier = Modifier.padding(start = 5.dp, top = 2.dp)
+            modifier = Modifier.padding(start = 7.dp, top = 5.dp)
                 .visibility(isVisible.value),
         ) {
             Text(
                 text = formatWithComma(goods.salePrice).toString(),
+                modifier = Modifier.alignByBaseline().padding(end = 1.dp),
                 textDecoration = if (discountedPercent != 0) TextDecoration.LineThrough else TextDecoration.None,
-                modifier = Modifier.padding(2.dp),
                 fontFamily = FontFamily(Typeface.SANS_SERIF),
                 style = MaterialTheme.typography.bodyMedium,
                 textAlign = TextAlign.Center,
@@ -130,7 +130,7 @@ fun GoodsItem(
             )
             Text(
                 text = "원",
-                modifier = Modifier.padding(top = 2.dp),
+                modifier = Modifier.alignByBaseline(),
                 fontFamily = FontFamily(Typeface.SANS_SERIF),
                 style = MaterialTheme.typography.bodyMedium,
                 textAlign = TextAlign.Center,
@@ -141,12 +141,11 @@ fun GoodsItem(
             )
         }
         Row(
-            modifier = Modifier.padding(start = 5.dp, top = 2.dp)
+            modifier = Modifier.padding(start = 7.dp, top = 2.dp)
         ) {
             Text(
                 text = discountedPercent.toString(),
-                modifier = Modifier.padding(2.dp)
-                    .visibility(isVisible.value),
+                modifier = Modifier.alignByBaseline().visibility(isVisible.value),
                 fontFamily = FontFamily(Typeface.SANS_SERIF),
                 fontWeight = FontWeight.SemiBold,
                 style = MaterialTheme.typography.bodyMedium,
@@ -158,8 +157,7 @@ fun GoodsItem(
             )
             Text(
                 text = "%",
-                modifier = Modifier.padding(top = 2.dp)
-                    .visibility(isVisible.value),
+                modifier = Modifier.alignByBaseline().visibility(isVisible.value),
                 fontFamily = FontFamily(Typeface.SANS_SERIF),
                 fontWeight = FontWeight.SemiBold,
                 style = MaterialTheme.typography.bodyMedium,
@@ -171,7 +169,9 @@ fun GoodsItem(
             )
             Text(
                 text = formatWithComma(goods.discountedPrice).toString(),
-                modifier = if (isVisible.value) Modifier.padding(start = 5.dp, top = 2.dp) else Modifier.padding(top = 2.dp),
+                modifier =
+                if (isVisible.value) Modifier.alignByBaseline().padding(start = 5.dp)
+                else Modifier.alignByBaseline().padding(start = 4.dp),
                 fontFamily = FontFamily(Typeface.SANS_SERIF),
                 fontWeight = FontWeight.SemiBold,
                 style = MaterialTheme.typography.bodyMedium,
@@ -183,7 +183,7 @@ fun GoodsItem(
             )
             Text(
                 text = "원",
-                modifier = Modifier.padding(vertical = 2.dp),
+                modifier = Modifier.alignByBaseline(),
                 fontFamily = FontFamily(Typeface.SANS_SERIF),
                 fontWeight = FontWeight.SemiBold,
                 style = MaterialTheme.typography.bodyMedium,
