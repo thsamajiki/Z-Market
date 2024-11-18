@@ -37,7 +37,7 @@ fun PaginationInfoScreen(
             text = "건의 검색결과",
             fontSize = 13.sp,
             fontFamily = FontFamily(Typeface.SANS_SERIF),
-            fontWeight = FontWeight.SemiBold,
+            fontWeight = FontWeight.Normal,
             style = MaterialTheme.typography.bodyMedium,
             color = Black,
         )
