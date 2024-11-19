@@ -7,7 +7,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class GoodsPagingSource(
-    private val goodsDataSource: GoodsDataSource,
+    private val goodsRemoteDataSource: GoodsRemoteDataSource,
     private val parentCategorySeq: Int,
     private val childCategorySeq: Int,
     private val query: String,
@@ -22,7 +22,7 @@ class GoodsPagingSource(
         val page = params.key ?: INITIAL_KEY
 
         return withContext(Dispatchers.IO) {
-            val response = goodsDataSource.fetchGoods(
+            val response = goodsRemoteDataSource.fetchGoods(
                 parentCategorySeq,
                 childCategorySeq,
                 page,
