@@ -1,11 +1,11 @@
 package com.hero.z_market.di
 
-import com.hero.z_market.data.remote.ChildCategoryDataSource
-import com.hero.z_market.data.remote.ChildCategoryDataSourceImpl
-import com.hero.z_market.data.remote.GoodsDataSource
-import com.hero.z_market.data.remote.GoodsDataSourceImpl
-import com.hero.z_market.data.remote.ParentCategoryDataSource
-import com.hero.z_market.data.remote.ParentCategoryDataSourceImpl
+import com.hero.z_market.data.remote.ChildCategoryRemoteDataSource
+import com.hero.z_market.data.remote.ChildCategoryRemoteDataSourceImpl
+import com.hero.z_market.data.remote.GoodsRemoteDataSource
+import com.hero.z_market.data.remote.GoodsRemoteDataSourceImpl
+import com.hero.z_market.data.remote.ParentCategoryRemoteDataSource
+import com.hero.z_market.data.remote.ParentCategoryRemoteDataSourceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -17,19 +17,19 @@ import javax.inject.Singleton
 abstract class DataSourceModule {
     @Singleton
     @Binds
-    abstract fun bindParentCategoryDataSource(
-        parentCategoryDataSourceImpl: ParentCategoryDataSourceImpl
-    ): ParentCategoryDataSource
+    abstract fun bindParentCategoryRemoteDataSource(
+        parentCategoryRemoteDataSourceImpl: ParentCategoryRemoteDataSourceImpl
+    ): ParentCategoryRemoteDataSource
 
     @Singleton
     @Binds
-    abstract fun bindChildCategoryDataSourceImpl(
-        childCategoryDataSourceImpl: ChildCategoryDataSourceImpl
-    ): ChildCategoryDataSource
+    abstract fun bindChildCategoryRemoteDataSource(
+        childCategoryRemoteDataSourceImpl: ChildCategoryRemoteDataSourceImpl
+    ): ChildCategoryRemoteDataSource
 
     @Singleton
     @Binds
-    abstract fun bindGoodsDataSource(
-        goodsDataSourceImpl: GoodsDataSourceImpl
-    ): GoodsDataSource
+    abstract fun bindGoodsRemoteDataSource(
+        goodsRemoteDataSourceImpl: GoodsRemoteDataSourceImpl
+    ): GoodsRemoteDataSource
 }
