@@ -6,7 +6,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-interface GoodsDataSource {
+interface GoodsRemoteDataSource {
     suspend fun fetchGoods(parentCategorySeq: Int,
                            childCategorySeq: Int,
                            page: Int,
@@ -14,9 +14,9 @@ interface GoodsDataSource {
                            query: String,): PageResponseAppGoodsInfoDTO
 }
 
-class GoodsDataSourceImpl @Inject constructor(
+class GoodsRemoteDataSourceImpl @Inject constructor(
     private val goodsService: GoodsService
-): GoodsDataSource {
+): GoodsRemoteDataSource {
     override suspend fun fetchGoods(
         parentCategorySeq: Int,
         childCategorySeq: Int,

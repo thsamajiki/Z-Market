@@ -4,8 +4,8 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
-import com.hero.z_market.data.remote.GoodsDataSource
 import com.hero.z_market.data.remote.GoodsPagingSource
+import com.hero.z_market.data.remote.GoodsRemoteDataSource
 import com.hero.z_market.data.response.PaginationItem
 import com.hero.z_market.data.response.toEntity
 import com.hero.z_market.domain.model.GoodsModel
@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class GoodsRepositoryImpl @Inject constructor(
-    private val goodsDataSource: GoodsDataSource
+    private val goodsRemoteDataSource: GoodsRemoteDataSource
 ): GoodsRepository {
     override suspend fun fetchGoods(
         parentCategorySeq: Int,
@@ -34,7 +34,7 @@ class GoodsRepositoryImpl @Inject constructor(
             ),
             initialKey = GoodsPagingSource.INITIAL_KEY,
             pagingSourceFactory = {
-                GoodsPagingSource(goodsDataSource, parentCategorySeq, childCategorySeq, query)
+                GoodsPagingSource(goodsRemoteDataSource, parentCategorySeq, childCategorySeq, query)
             }
         )
             .flow
@@ -53,7 +53,7 @@ class GoodsRepositoryImpl @Inject constructor(
         query: String,
     ): Flow<PaginationItem> {
         return flow {
-            val response = goodsDataSource.fetchGoods(parentCategorySeq, childCategorySeq, page, size, query).pagination.toEntity()
+            val response = goodsRemoteDataSource.fetchGoods(parentCategorySeq, childCategorySeq, page, size, query).pagination.toEntity()
             emit(response)
         }.flowOn(Dispatchers.IO)
     }
