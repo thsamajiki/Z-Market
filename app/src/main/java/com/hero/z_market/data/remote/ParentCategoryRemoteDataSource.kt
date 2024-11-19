@@ -6,13 +6,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-interface ParentCategoryDataSource {
+interface ParentCategoryRemoteDataSource {
     suspend fun fetchParentCategoryList(): ListResultAppDispClasInfoDTO
 }
 
-class ParentCategoryDataSourceImpl @Inject constructor(
+class ParentCategoryRemoteDataSourceImpl @Inject constructor(
     private val parentCategoryService: ParentCategoryService
-): ParentCategoryDataSource {
+): ParentCategoryRemoteDataSource {
     override suspend fun fetchParentCategoryList(): ListResultAppDispClasInfoDTO {
         return withContext(Dispatchers.IO) {
             parentCategoryService.fetchParentCategoryList()
