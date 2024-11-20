@@ -1,42 +1,51 @@
 package com.hero.z_market.ui.screen.goods
 
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color.Companion.Black
+import androidx.compose.ui.graphics.Color.Companion.LightGray
+import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.unit.dp
 import com.hero.z_market.domain.enum.GoodsSort
+import com.hero.z_market.ui.utils.ChipGroup
+import com.hero.z_market.ui.utils.ChipState
+import com.hero.z_market.ui.utils.ChipStyle
 import com.hero.z_market.ui.viewmodel.ChildCategoryGoodsListViewModel
 
 @Composable
 fun GoodsSortChipGroupScreen(
     vm: ChildCategoryGoodsListViewModel
 ) {
-    var selectedChipIndex = remember { mutableIntStateOf(0) } // 선택된 Chip의 인덱스 (-1은 아무것도 선택되지 않음을 의미)
-
-    Row(
-        modifier = Modifier.padding(start = 10.dp),
-    ) {
-        GoodsSortChip(
-            vm,
-            isSelected = selectedChipIndex.intValue == 0
-        ) { selectedChipIndex.intValue = 0 }
-        GoodsSortChip(
-            vm,
-            GoodsSort.BOUGHT,
-            isSelected = selectedChipIndex.intValue == 1
-        ) { selectedChipIndex.intValue = 1 }
-        GoodsSortChip(
-            vm,
-            GoodsSort.ASCENDING,
-            isSelected = selectedChipIndex.intValue == 2
-        ) { selectedChipIndex.intValue = 2 }
-        GoodsSortChip(
-            vm,
-            GoodsSort.DESCENDING,
-            isSelected = selectedChipIndex.intValue == 3
-        ) { selectedChipIndex.intValue = 3 }
+    val selectedChipStateList = remember {
+        mutableStateListOf(
+            ChipState(GoodsSort.RECOMMENDED.value, mutableStateOf(true)),
+            ChipState(GoodsSort.BOUGHT.value, mutableStateOf(false)),
+            ChipState(GoodsSort.ASCENDING.value, mutableStateOf(false)),
+            ChipState(GoodsSort.DESCENDING.value, mutableStateOf(false))
+        )
     }
+
+    ChipGroup(
+        vm = vm,
+        modifier = Modifier.padding(horizontal = 20.dp),
+        chipStateList = selectedChipStateList,
+        chipStyle = ChipStyle(
+            selectedColor = Transparent,
+            unselectedColor = Transparent,
+            chipTextStyle = MaterialTheme.typography.bodyMedium,
+            selectedTextColor = Black,
+            unselectedTextColor = LightGray,
+        ),
+        onChipClicked = { _, isSelected, index ->
+            val selectedChip = selectedChipStateList[index]
+            selectedChip.isSelected.value = !isSelected
+
+            vm.setSortValue(selectedChip.labelText)
+        }
+    )
 }
