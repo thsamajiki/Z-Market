@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.ExperimentalMaterialApi
@@ -141,7 +142,7 @@ fun ChildCategoryGoodsListScreen(
             }
 
             stickyHeader {
-                Spacer(modifier = Modifier.fillMaxWidth().padding(top = 30.dp))
+                Spacer(modifier = Modifier.fillMaxWidth().height(30.dp))
                 Column {
                     when(fetchPaginationUiState) {
                         is UiState.Success<PaginationItem> -> {
@@ -153,8 +154,9 @@ fun ChildCategoryGoodsListScreen(
                         is UiState.Idle -> {
                         }
                     }
-                    Spacer(modifier = Modifier.fillMaxWidth().padding(top = 10.dp))
+                    Spacer(modifier = Modifier.fillMaxWidth().height(10.dp))
                     GoodsSortChipGroupScreen(vm)
+                    Spacer(modifier = Modifier.fillMaxWidth().height(10.dp))
                 }
             }
 
