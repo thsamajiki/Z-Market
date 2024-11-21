@@ -1,7 +1,7 @@
 package com.hero.z_market.data.response
 
 import com.google.gson.annotations.SerializedName
-import com.hero.z_market.domain.model.ChildCategoryModel
+import com.hero.z_market.domain.entity.ChildCategoryEntity
 
 data class SingleResultAppDispClasInfoBySubDispClasInfoDTO(
     @SerializedName("data") val childCategoryInfoList: AppDispClasInfoBySubDispClasInfoDTO,
@@ -22,8 +22,8 @@ data class AppSubDispClasInfoDTO(
     @SerializedName("dispClasLvl") val childCategoryLevel: String, // 전시 분류 레벨 Enum: [대분류, 중분류]
 )
 
-fun AppSubDispClasInfoDTO.toEntity(): ChildCategoryModel {
-    return ChildCategoryModel(
+fun AppSubDispClasInfoDTO.toEntity(): ChildCategoryEntity {
+    return ChildCategoryEntity(
         childCategorySeq = childCategorySeq,
         childCategoryName = childCategoryName,
         parentCategorySeq = parentCategorySeq,
