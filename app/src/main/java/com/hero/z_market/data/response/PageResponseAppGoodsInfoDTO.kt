@@ -1,7 +1,7 @@
 package com.hero.z_market.data.response
 
 import com.google.gson.annotations.SerializedName
-import com.hero.z_market.domain.model.GoodsModel
+import com.hero.z_market.domain.entity.GoodsEntity
 
 data class PageResponseAppGoodsInfoDTO(
     val data: List<AppGoodsInfoDTO>,
@@ -38,8 +38,8 @@ data class LowerBadge(
     val backgroundColor: String,
 )
 
-fun AppGoodsInfoDTO.toEntity(): GoodsModel {
-    return GoodsModel(
+fun AppGoodsInfoDTO.toEntity(): GoodsEntity {
+    return GoodsEntity(
         goodsSeq = goodsSeq,
         optionYesNo = optionYesNo,
         goodsCode = goodsCode,

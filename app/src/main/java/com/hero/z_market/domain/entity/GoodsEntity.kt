@@ -1,9 +1,9 @@
-package com.hero.z_market.domain.model
+package com.hero.z_market.domain.entity
 
 import com.hero.z_market.data.response.LowerBadge
 import com.hero.z_market.data.response.UpperBadge
 
-data class GoodsModel(
+data class GoodsEntity(
     val goodsSeq: Int, // 상품 번호
     val optionYesNo: String, // Enum:[Y, N]
     val goodsCode: String, // 상품 코드

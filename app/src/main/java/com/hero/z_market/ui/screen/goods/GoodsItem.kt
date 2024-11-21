@@ -41,7 +41,7 @@ import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.hero.z_market.R
 import com.hero.z_market.constants.BASE_IMG_URL
-import com.hero.z_market.domain.model.GoodsModel
+import com.hero.z_market.domain.entity.GoodsEntity
 import com.hero.z_market.ui.preview.goods.GoodsPreviewParameterProvider
 import com.hero.z_market.ui.theme.ZMarketTheme
 import com.hero.z_market.ui.utils.TextExtension.visibility
@@ -50,9 +50,9 @@ import com.hero.z_market.utils.FormatUtil.formatWithComma
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
 fun GoodsItem(
-    goods: GoodsModel,
+    goods: GoodsEntity,
     modifier: Modifier,
-    onClicked: (GoodsModel) -> Unit,
+    onClicked: (GoodsEntity) -> Unit,
 ) {
     val context = LocalContext.current
     val discountedPercent =
@@ -201,7 +201,7 @@ fun GoodsItem(
 @Preview(showBackground = true)
 fun GoodsItemPreview(
     @PreviewParameter(GoodsPreviewParameterProvider::class)
-    goods: GoodsModel,
+    goods: GoodsEntity,
 ) {
     val context = LocalContext.current
     ZMarketTheme {

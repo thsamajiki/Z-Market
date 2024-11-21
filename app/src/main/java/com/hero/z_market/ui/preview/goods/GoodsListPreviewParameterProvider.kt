@@ -3,12 +3,12 @@ package com.hero.z_market.ui.preview.goods
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.hero.z_market.data.response.LowerBadge
 import com.hero.z_market.data.response.UpperBadge
-import com.hero.z_market.domain.model.GoodsModel
+import com.hero.z_market.domain.entity.GoodsEntity
 
-class GoodsListPreviewParameterProvider : PreviewParameterProvider<List<GoodsModel>> {
+class GoodsListPreviewParameterProvider : PreviewParameterProvider<List<GoodsEntity>> {
     override val values = sequenceOf(
         listOf(
-            GoodsModel(
+            GoodsEntity(
                 goodsSeq = 1001,
                 optionYesNo = "Y",
                 goodsCode = "DPDCL21031",
@@ -25,7 +25,7 @@ class GoodsListPreviewParameterProvider : PreviewParameterProvider<List<GoodsMod
                 upperBadge = UpperBadge("good", "Red", "Pink"),
                 lowerBadgeList = listOf(LowerBadge("not bad", "Red", "Pink")),
             ),
-            GoodsModel(
+            GoodsEntity(
                 goodsSeq = 1002,
                 optionYesNo = "Y",
                 goodsCode = "DPDCL21032",
@@ -42,7 +42,7 @@ class GoodsListPreviewParameterProvider : PreviewParameterProvider<List<GoodsMod
                 upperBadge = UpperBadge("good", "Yellow", "White"),
                 lowerBadgeList = listOf(LowerBadge("not bad", "Yellow", "White")),
             ),
-            GoodsModel(
+            GoodsEntity(
                 goodsSeq = 1003,
                 optionYesNo = "Y",
                 goodsCode = "DPDCL21033",
@@ -59,7 +59,7 @@ class GoodsListPreviewParameterProvider : PreviewParameterProvider<List<GoodsMod
                 upperBadge = UpperBadge("good", "Purple", "White"),
                 lowerBadgeList = listOf(LowerBadge("not bad", "Purple", "White")),
             ),
-            GoodsModel(
+            GoodsEntity(
                 goodsSeq = 1004,
                 optionYesNo = "Y",
                 goodsCode = "DPDCL21034",

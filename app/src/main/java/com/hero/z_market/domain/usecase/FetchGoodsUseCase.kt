@@ -1,7 +1,7 @@
 package com.hero.z_market.domain.usecase
 
 import androidx.paging.PagingData
-import com.hero.z_market.domain.model.GoodsModel
+import com.hero.z_market.domain.entity.GoodsEntity
 import com.hero.z_market.domain.repository.GoodsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -15,7 +15,7 @@ interface FetchGoodsUseCase {
         page: Int,
         size: Int,
         searchValue: String,
-    ): Flow<PagingData<GoodsModel>>
+    ): Flow<PagingData<GoodsEntity>>
 }
 
 class FetchGoodsUseCaseImpl @Inject constructor(
@@ -27,7 +27,7 @@ class FetchGoodsUseCaseImpl @Inject constructor(
         page: Int,
         size: Int,
         query: String,
-    ): Flow<PagingData<GoodsModel>> {
+    ): Flow<PagingData<GoodsEntity>> {
         return withContext(Dispatchers.IO) {
             repository.fetchGoods(parentCategorySeq, childCategorySeq, page, size, query)
         }

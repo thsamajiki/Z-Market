@@ -13,15 +13,15 @@ import androidx.compose.ui.unit.dp
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
-import com.hero.z_market.domain.model.GoodsModel
+import com.hero.z_market.domain.entity.GoodsEntity
 import com.hero.z_market.ui.preview.goods.GoodsListPreviewParameterProvider
 import com.hero.z_market.ui.theme.ZMarketTheme
 import kotlinx.coroutines.flow.flowOf
 
 @Composable
 fun GoodsListScreen(
-    goods: LazyPagingItems<GoodsModel>,
-    onClicked: (GoodsModel) -> Unit,
+    goods: LazyPagingItems<GoodsEntity>,
+    onClicked: (GoodsEntity) -> Unit,
 ) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
@@ -44,7 +44,7 @@ fun GoodsListScreen(
 @Preview(showBackground = true)
 fun GoodsListScreenPreview(
     @PreviewParameter(GoodsListPreviewParameterProvider::class)
-    goodsList: List<GoodsModel>
+    goodsList: List<GoodsEntity>
 ) {
     val goodsPagingItems = flowOf(PagingData.from(goodsList)).collectAsLazyPagingItems()
 
