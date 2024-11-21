@@ -2,9 +2,10 @@ package com.hero.z_market.ui.screen
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.BottomNavigation
-import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material3.Icon
+import androidx.compose.material3.NavigationBar
+import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -35,15 +36,15 @@ fun BottomNavigationBar(navController: NavHostController) {
     )
     val context = LocalContext.current
 
-    BottomNavigation(
-        backgroundColor = White,
+    NavigationBar(
+        containerColor = White,
         contentColor = Color(0xFF3F414E)
     ) {
         val navBackStackEntry by navController.currentBackStackEntryAsState()
         val currentRoute = navBackStackEntry?.destination?.route
 
         items.forEach { item ->
-            BottomNavigationItem(
+            NavigationBarItem(
                 icon = {
                     Icon(
                         painter = painterResource(id = item.icon),
@@ -59,22 +60,19 @@ fun BottomNavigationBar(navController: NavHostController) {
                 },
                 // label 선택 안했을 때도 보이는 메뉴 이름
                 label = {
-                    if (currentRoute == item.screenRoute) {
-                        Text(
-                            item.title,
-                            fontSize = 9.sp,
-                            color = selectedMenu
-                        )
-                    } else {
-                        Text(
-                            item.title,
-                            fontSize = 9.sp,
-                            color = unselectedMenu
-                        )
-                    }
+                    Text(
+                        text = item.title,
+                        fontSize = 9.sp,
+                        color = if (currentRoute == item.screenRoute) selectedMenu else unselectedMenu
+                    )
                 },
-                selectedContentColor = selectedMenu,
-                unselectedContentColor = unselectedMenu,
+                colors = NavigationBarItemDefaults.colors(
+                    selectedIconColor = selectedMenu,
+                    selectedTextColor = selectedMenu,
+                    indicatorColor = Color.Transparent,
+                    unselectedIconColor = unselectedMenu,
+                    unselectedTextColor = unselectedMenu
+                ),
                 selected = currentRoute == item.screenRoute,
                 alwaysShowLabel = true,
                 onClick = {
