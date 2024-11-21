@@ -30,16 +30,16 @@ import androidx.compose.ui.unit.sp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.hero.z_market.constants.BASE_IMG_URL
-import com.hero.z_market.domain.model.ParentCategoryModel
+import com.hero.z_market.domain.entity.ParentCategoryEntity
 import com.hero.z_market.ui.preview.parentCategory.ParentCategoryPreviewParameterProvider
 import com.hero.z_market.ui.theme.ZMarketTheme
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalGlideComposeApi::class)
 @Composable
 fun ParentCategoryItem(
-    parentCategory: ParentCategoryModel,
+    parentCategory: ParentCategoryEntity,
     modifier: Modifier,
-    onClicked: (ParentCategoryModel) -> Unit
+    onClicked: (ParentCategoryEntity) -> Unit
 ) {
     Card(
         modifier = modifier
@@ -88,7 +88,7 @@ fun ParentCategoryItem(
 @Preview(showBackground = true)
 fun ParentCategoryItemPreview(
     @PreviewParameter(ParentCategoryPreviewParameterProvider::class, limit = 5)
-    parentCategory: ParentCategoryModel,
+    parentCategory: ParentCategoryEntity,
 ) {
     ZMarketTheme {
         ParentCategoryItem(

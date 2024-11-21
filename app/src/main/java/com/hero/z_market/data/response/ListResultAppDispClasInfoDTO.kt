@@ -1,7 +1,7 @@
 package com.hero.z_market.data.response
 
 import com.google.gson.annotations.SerializedName
-import com.hero.z_market.domain.model.ParentCategoryModel
+import com.hero.z_market.domain.entity.ParentCategoryEntity
 
 data class ListResultAppDispClasInfoDTO(
     val data: List<AppDispClasInfoDTO>,
@@ -17,8 +17,8 @@ data class AppDispClasInfoDTO(
 )
 
 
-fun AppDispClasInfoDTO.toEntity(): ParentCategoryModel {
-    return ParentCategoryModel(
+fun AppDispClasInfoDTO.toEntity(): ParentCategoryEntity {
+    return ParentCategoryEntity(
         parentCategorySeq = parentCategorySeq,
         parentCategoryName = parentCategoryName,
         parentCategoryImgPath = parentCategoryImgPath,
