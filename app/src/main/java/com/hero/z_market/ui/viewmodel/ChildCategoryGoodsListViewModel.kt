@@ -6,8 +6,8 @@ import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.hero.z_market.data.response.PaginationItem
 import com.hero.z_market.domain.enum.GoodsSort
-import com.hero.z_market.domain.model.ChildCategoryModel
-import com.hero.z_market.domain.model.GoodsModel
+import com.hero.z_market.domain.entity.ChildCategoryEntity
+import com.hero.z_market.domain.entity.GoodsEntity
 import com.hero.z_market.domain.usecase.FetchChildCategoryListUseCase
 import com.hero.z_market.domain.usecase.FetchGoodsUseCase
 import com.hero.z_market.domain.usecase.FetchPaginationInfoUseCase
@@ -28,24 +28,24 @@ class ChildCategoryGoodsListViewModel @Inject constructor(
     private val fetchGoodsUseCase: FetchGoodsUseCase,
     private val fetchPaginationInfoUseCase: FetchPaginationInfoUseCase,
 ) : ViewModel() {
-    private val _fetchChildCategoryListUiState = MutableStateFlow<UiState<List<ChildCategoryModel>>>(UiState.Idle)
-    val fetchChildCategoryListUiState: StateFlow<UiState<List<ChildCategoryModel>>>
+    private val _fetchChildCategoryListUiState = MutableStateFlow<UiState<List<ChildCategoryEntity>>>(UiState.Idle)
+    val fetchChildCategoryListUiState: StateFlow<UiState<List<ChildCategoryEntity>>>
         get() = _fetchChildCategoryListUiState.asStateFlow()
 
     private val _fetchPaginationUiState = MutableStateFlow<UiState<PaginationItem>>(UiState.Idle)
     val fetchPaginationUiState: StateFlow<UiState<PaginationItem>>
         get() = _fetchPaginationUiState.asStateFlow()
 
-    private val _fetchGoodsListUiState = MutableStateFlow<UiState<PagingData<GoodsModel>>>(UiState.Idle)
-    val fetchGoodsListUiState: StateFlow<UiState<PagingData<GoodsModel>>>
+    private val _fetchGoodsListUiState = MutableStateFlow<UiState<PagingData<GoodsEntity>>>(UiState.Idle)
+    val fetchGoodsListUiState: StateFlow<UiState<PagingData<GoodsEntity>>>
         get() = _fetchGoodsListUiState.asStateFlow()
 
-    private val _childCategoryList = MutableStateFlow<List<ChildCategoryModel>>(emptyList())
-    val childCategoryList: StateFlow<List<ChildCategoryModel>>
+    private val _childCategoryList = MutableStateFlow<List<ChildCategoryEntity>>(emptyList())
+    val childCategoryList: StateFlow<List<ChildCategoryEntity>>
         get() = _childCategoryList
 
-    private val _goods = MutableStateFlow<PagingData<GoodsModel>>(PagingData.empty())
-    val goods: StateFlow<PagingData<GoodsModel>> get() = _goods
+    private val _goods = MutableStateFlow<PagingData<GoodsEntity>>(PagingData.empty())
+    val goods: StateFlow<PagingData<GoodsEntity>> get() = _goods
 
     private val _paginationInfo = MutableStateFlow(PaginationItem())
     val paginationInfo = _paginationInfo.asStateFlow()
@@ -62,8 +62,8 @@ class ChildCategoryGoodsListViewModel @Inject constructor(
     private val _sortValue = MutableStateFlow<String>(GoodsSort.RECOMMENDED.value)
     val sortValue: StateFlow<String> = _sortValue
 
-    private val _selectedChildCategory = MutableStateFlow<ChildCategoryModel>(
-        ChildCategoryModel(
+    private val _selectedChildCategory = MutableStateFlow<ChildCategoryEntity>(
+        ChildCategoryEntity(
             _childCategorySeq.value,
             "상품 전체",
             _parentCategorySeq.value,
@@ -72,7 +72,7 @@ class ChildCategoryGoodsListViewModel @Inject constructor(
             true
         )
     )
-    val selectedChildCategory: StateFlow<ChildCategoryModel>
+    val selectedChildCategory: StateFlow<ChildCategoryEntity>
         get() = _selectedChildCategory
 
     init {

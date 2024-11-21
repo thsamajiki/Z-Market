@@ -29,9 +29,9 @@ import androidx.compose.ui.unit.dp
 import androidx.paging.PagingData
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.hero.z_market.data.response.PaginationItem
-import com.hero.z_market.domain.model.ChildCategoryModel
-import com.hero.z_market.domain.model.GoodsModel
-import com.hero.z_market.domain.model.ParentCategoryModel
+import com.hero.z_market.domain.entity.ChildCategoryEntity
+import com.hero.z_market.domain.entity.GoodsEntity
+import com.hero.z_market.domain.entity.ParentCategoryEntity
 import com.hero.z_market.ui.screen.goods.GoodsListScreen
 import com.hero.z_market.ui.screen.goods.GoodsSortChipGroupScreen
 import com.hero.z_market.ui.state.UiState
@@ -41,7 +41,7 @@ import com.hero.z_market.ui.viewmodel.ChildCategoryGoodsListViewModel
 @Composable
 fun ChildCategoryGoodsListScreen(
     vm: ChildCategoryGoodsListViewModel,
-    parentCategory: ParentCategoryModel?,
+    parentCategory: ParentCategoryEntity?,
 ) {
     val fetchChildCategoryListUiState by vm.fetchChildCategoryListUiState.collectAsState()
     val fetchPaginationUiState by vm.fetchPaginationUiState.collectAsState()
@@ -106,16 +106,16 @@ fun ChildCategoryGoodsListScreen(
                 .nestedScroll(nestedScrollConnection, nestedScrollDispatcher)
         ) {
             val parentCategorySeq = childCategoryList.firstOrNull()?.parentCategorySeq ?: 0
-            val headerItem = ChildCategoryModel(
+            val headerItem = ChildCategoryEntity(
                 0, "상품 전체", parentCategorySeq, "", "", true
             )
-            val allChildCategories = mutableListOf<ChildCategoryModel>().apply {
+            val allChildCategories = mutableListOf<ChildCategoryEntity>().apply {
                 add(headerItem)
                 addAll(childCategoryList)
             }
             item {
                 when(fetchChildCategoryListUiState) {
-                    is UiState.Success<List<ChildCategoryModel>> -> {
+                    is UiState.Success<List<ChildCategoryEntity>> -> {
                         ChildCategoryListScreen(
                             childCategoryList = allChildCategories,
                             selectedCategory = selectedChildCategory.value,
@@ -162,7 +162,7 @@ fun ChildCategoryGoodsListScreen(
 
             item {
                 when (fetchGoodsListUiState) {
-                    is UiState.Success<PagingData<GoodsModel>> -> {
+                    is UiState.Success<PagingData<GoodsEntity>> -> {
                         GoodsListScreen(
                             goods = vm.goods.collectAsLazyPagingItems(),
                             onClicked = {}

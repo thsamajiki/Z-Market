@@ -12,14 +12,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
-import com.hero.z_market.domain.model.ParentCategoryModel
+import com.hero.z_market.domain.entity.ParentCategoryEntity
 import com.hero.z_market.ui.preview.parentCategory.ParentCategoryListPreviewParameterProvider
 import com.hero.z_market.ui.theme.ZMarketTheme
 
 @Composable
 fun ParentCategoryListScreen(
-    parentCategoryList: List<ParentCategoryModel>,
-    onClicked: (ParentCategoryModel) -> Unit,
+    parentCategoryList: List<ParentCategoryEntity>,
+    onClicked: (ParentCategoryEntity) -> Unit,
 ) {
     LazyVerticalGrid(
         columns = GridCells.Fixed(4),
@@ -43,7 +43,7 @@ fun ParentCategoryListScreen(
 @Preview(showBackground = true)
 fun ParentCategoryListScreenPreview(
     @PreviewParameter(ParentCategoryListPreviewParameterProvider::class)
-    parentCategoryList: List<ParentCategoryModel>
+    parentCategoryList: List<ParentCategoryEntity>
 ) {
     ZMarketTheme {
         ParentCategoryListScreen(parentCategoryList, onClicked = {})

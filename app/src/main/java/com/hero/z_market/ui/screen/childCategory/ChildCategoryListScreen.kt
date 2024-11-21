@@ -14,15 +14,15 @@ import androidx.compose.ui.graphics.Color.Companion.LightGray
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
-import com.hero.z_market.domain.model.ChildCategoryModel
+import com.hero.z_market.domain.entity.ChildCategoryEntity
 import com.hero.z_market.ui.preview.childCategory.ChildCategoryListPreviewParameterProvider
 import com.hero.z_market.ui.theme.ZMarketTheme
 
 @Composable
 fun ChildCategoryListScreen(
-    childCategoryList: List<ChildCategoryModel>,
-    selectedCategory: ChildCategoryModel?,
-    onClicked: (ChildCategoryModel) -> Unit
+    childCategoryList: List<ChildCategoryEntity>,
+    selectedCategory: ChildCategoryEntity?,
+    onClicked: (ChildCategoryEntity) -> Unit
 ) {
     var selectedCategoryState = remember { mutableStateOf(selectedCategory) }
 
@@ -104,7 +104,7 @@ fun ChildCategoryListScreen(
                     childCategorySeq = 0,
                     childCategoryName = "",
                     isSelected = false
-                ) ?: ChildCategoryModel(
+                ) ?: ChildCategoryEntity(
                     0, "", 0, "", "", false
                 ),
                 modifier = borderModifier,
@@ -119,7 +119,7 @@ fun ChildCategoryListScreen(
 @Preview(showBackground = true)
 fun ChildCategoryListScreenPreview(
     @PreviewParameter(ChildCategoryListPreviewParameterProvider::class)
-    childCategoryList: List<ChildCategoryModel>
+    childCategoryList: List<ChildCategoryEntity>
 ) {
     ZMarketTheme {
         ChildCategoryListScreen(childCategoryList, childCategoryList[0], onClicked = {})

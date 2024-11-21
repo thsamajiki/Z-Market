@@ -25,15 +25,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.hero.z_market.domain.model.ChildCategoryModel
+import com.hero.z_market.domain.entity.ChildCategoryEntity
 import com.hero.z_market.ui.preview.childCategory.ChildCategoryPreviewParameterProvider
 import com.hero.z_market.ui.theme.ZMarketTheme
 
 @Composable
 fun ChildCategoryItem(
-    childCategory: ChildCategoryModel,
+    childCategory: ChildCategoryEntity,
     modifier: Modifier,
-    onClicked: (ChildCategoryModel) -> Unit,
+    onClicked: (ChildCategoryEntity) -> Unit,
     isSelected: Boolean,
 ) {
     Card(
@@ -66,7 +66,7 @@ fun ChildCategoryItem(
 @Preview(showBackground = true)
 fun ChildCategoryItemPreview(
     @PreviewParameter(ChildCategoryPreviewParameterProvider::class, limit = 5)
-    childCategory: ChildCategoryModel
+    childCategory: ChildCategoryEntity
 ) {
     ZMarketTheme {
         ChildCategoryItem(

@@ -8,7 +8,7 @@ import com.hero.z_market.data.remote.GoodsPagingSource
 import com.hero.z_market.data.remote.GoodsRemoteDataSource
 import com.hero.z_market.data.response.PaginationItem
 import com.hero.z_market.data.response.toEntity
-import com.hero.z_market.domain.model.GoodsModel
+import com.hero.z_market.domain.entity.GoodsEntity
 import com.hero.z_market.domain.repository.GoodsRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -26,7 +26,7 @@ class GoodsRepositoryImpl @Inject constructor(
         page: Int,
         size: Int,
         query: String,
-    ): Flow<PagingData<GoodsModel>> {
+    ): Flow<PagingData<GoodsEntity>> {
         return Pager(
             config = PagingConfig(
                 pageSize = 20, // 한 번에 읽을 데이터 수

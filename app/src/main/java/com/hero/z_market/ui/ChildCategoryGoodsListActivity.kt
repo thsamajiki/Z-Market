@@ -15,7 +15,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.hero.z_market.domain.enum.GoodsSort
-import com.hero.z_market.domain.model.ParentCategoryModel
+import com.hero.z_market.domain.entity.ParentCategoryEntity
 import com.hero.z_market.ui.MainActivity.Companion.PARENT_CATEGORY
 import com.hero.z_market.ui.screen.childCategory.ChildCategoryGoodsListScreen
 import com.hero.z_market.ui.theme.ZMarketTheme
@@ -46,7 +46,7 @@ class ChildCategoryGoodsListActivity : ComponentActivity() {
 
     fun fetchGoodsList(
         vm: ChildCategoryGoodsListViewModel,
-        parentCategory: ParentCategoryModel?,
+        parentCategory: ParentCategoryEntity?,
     ) {
         val parentCategorySeq = parentCategory?.parentCategorySeq
         vm.setParentCategorySeqValue(parentCategorySeq)
@@ -63,25 +63,25 @@ class ChildCategoryGoodsListActivity : ComponentActivity() {
         )
     }
 
-    private fun getParentCategory(): ParentCategoryModel? {
+    private fun getParentCategory(): ParentCategoryEntity? {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            intent.getParcelableExtra<ParentCategoryModel>(
+            intent.getParcelableExtra<ParentCategoryEntity>(
                 PARENT_CATEGORY,
-                ParentCategoryModel::class.java
+                ParentCategoryEntity::class.java
             )
         } else {
             @Suppress("DEPRECATION")
-            intent.getParcelableExtra<ParentCategoryModel>(PARENT_CATEGORY)
+            intent.getParcelableExtra<ParentCategoryEntity>(PARENT_CATEGORY)
         }
     }
 
     companion object {
         fun getIntent(
             context: Context,
-            parentCategoryModel: ParentCategoryModel,
+            parentCategoryEntity: ParentCategoryEntity,
         ): Intent {
             return Intent(context, ChildCategoryGoodsListActivity::class.java).apply {
-                putExtra(PARENT_CATEGORY, parentCategoryModel)
+                putExtra(PARENT_CATEGORY, parentCategoryEntity)
             }
         }
     }

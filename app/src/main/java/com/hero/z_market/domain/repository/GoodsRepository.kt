@@ -2,7 +2,7 @@ package com.hero.z_market.domain.repository
 
 import androidx.paging.PagingData
 import com.hero.z_market.data.response.PaginationItem
-import com.hero.z_market.domain.model.GoodsModel
+import com.hero.z_market.domain.entity.GoodsEntity
 import kotlinx.coroutines.flow.Flow
 
 interface GoodsRepository {
@@ -12,7 +12,7 @@ interface GoodsRepository {
         page: Int,
         size: Int,
         query: String,
-    ): Flow<PagingData<GoodsModel>>
+    ): Flow<PagingData<GoodsEntity>>
 
     suspend fun fetchPaginationInfo(
         parentCategorySeq: Int,

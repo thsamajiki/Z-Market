@@ -20,14 +20,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.unit.sp
 import com.hero.z_market.R
-import com.hero.z_market.domain.model.ParentCategoryModel
+import com.hero.z_market.domain.entity.ParentCategoryEntity
 import com.hero.z_market.ui.preview.parentCategory.ParentCategoryPreviewParameterProvider
 import com.hero.z_market.ui.theme.ZMarketTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ChildCategoryGoodsListTopAppBar(
-    parentCategoryModel: ParentCategoryModel?,
+    parentCategoryEntity: ParentCategoryEntity?,
     onBackClick: () -> Unit,
 ) {
     val context = LocalContext.current
@@ -36,7 +36,7 @@ fun ChildCategoryGoodsListTopAppBar(
         colors = TopAppBarDefaults.topAppBarColors(White),
         title = {
             Text(
-                text = parentCategoryModel?.parentCategoryName ?: "알 수 없음",
+                text = parentCategoryEntity?.parentCategoryName ?: "알 수 없음",
                 textAlign = TextAlign.Center,
                 fontSize = 14.sp,
                 fontWeight = FontWeight.SemiBold
@@ -73,7 +73,7 @@ fun ChildCategoryGoodsListTopAppBar(
 @Preview(showBackground = true)
 fun ChildCategoryGoodsListTopAppBarPreview(
     @PreviewParameter(ParentCategoryPreviewParameterProvider::class, limit = 5)
-    parentCategory: ParentCategoryModel?
+    parentCategory: ParentCategoryEntity?
 ) {
     ZMarketTheme {
         ChildCategoryGoodsListTopAppBar(parentCategory, onBackClick= {})
