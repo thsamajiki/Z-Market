@@ -2,6 +2,10 @@ package com.hero.z_market.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
+val primaryColor = Color(0xFF418D6B)
+val secondaryColor = Color(0xFF2FCA41)
+val tertiaryColor = Color(0xFF02E777)
+
 val toolbarItemColor = Color(0xFF868A93)
 val selectedMenu = Color(0xFF021245)
 val unselectedMenu = Color(0xFF707683)
