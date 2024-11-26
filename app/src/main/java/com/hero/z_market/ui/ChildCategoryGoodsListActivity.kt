@@ -14,8 +14,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.hero.z_market.domain.enum.GoodsSort
 import com.hero.z_market.domain.entity.ParentCategoryEntity
+import com.hero.z_market.domain.enum.GoodsSort
 import com.hero.z_market.ui.MainActivity.Companion.PARENT_CATEGORY
 import com.hero.z_market.ui.screen.childCategory.ChildCategoryGoodsListScreen
 import com.hero.z_market.ui.theme.ZMarketTheme
@@ -36,7 +36,7 @@ class ChildCategoryGoodsListActivity : ComponentActivity() {
 
                     val parentCategory = getParentCategory()
 
-                    ChildCategoryGoodsListScreen(vm, parentCategory)
+                    ChildCategoryGoodsListScreen(parentCategory = parentCategory)
 
                     LaunchedEffect(parentCategory) { fetchGoodsList(vm, parentCategory) }
                 }

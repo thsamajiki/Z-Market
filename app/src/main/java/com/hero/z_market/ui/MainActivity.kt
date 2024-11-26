@@ -3,14 +3,12 @@ package com.hero.z_market.ui
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.ui.Modifier
 import com.hero.z_market.ui.screen.MainScreen
 import com.hero.z_market.ui.theme.ZMarketTheme
-import com.hero.z_market.ui.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,8 +21,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    val vm: MainViewModel by viewModels()
-                    MainScreen(vm)
+                    MainScreen()
                 }
             }
         }
