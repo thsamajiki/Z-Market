@@ -25,7 +25,8 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.hero.z_market.domain.model.ParentCategoryModel
+import androidx.hilt.navigation.compose.hiltViewModel
+import com.hero.z_market.domain.entity.ParentCategoryEntity
 import com.hero.z_market.ui.ChildCategoryGoodsListActivity
 import com.hero.z_market.ui.MainActivity.Companion.PARENT_CATEGORY
 import com.hero.z_market.ui.screen.parentCategory.ParentCategoryListScreen
@@ -33,7 +34,7 @@ import com.hero.z_market.ui.state.UiState
 import com.hero.z_market.ui.viewmodel.MainViewModel
 
 @Composable
-fun HomeScreen(vm: MainViewModel) {
+fun HomeScreen(vm: MainViewModel = hiltViewModel()) {
     val uiState by vm.fetchParentCategoryListUiState.collectAsState()
     val context = LocalContext.current
 
@@ -63,9 +64,9 @@ fun HomeScreen(vm: MainViewModel) {
     ) {
         item {
             when (uiState) {
-                is UiState.Success<List<ParentCategoryModel>> -> {
+                is UiState.Success<List<ParentCategoryEntity>> -> {
                     ParentCategoryListScreen(
-                        parentCategoryList = (uiState as UiState.Success<List<ParentCategoryModel>>).data,
+                        parentCategoryList = (uiState as UiState.Success<List<ParentCategoryEntity>>).data,
                         onClicked = { parentCategory ->
                             val intent =
                                 ChildCategoryGoodsListActivity.getIntent(context, parentCategory)
@@ -76,11 +77,9 @@ fun HomeScreen(vm: MainViewModel) {
                         }
                     )
                 }
-
                 is UiState.Failed -> {
                     Toast.makeText(context, "데이터를 불러오는 데 실패했습니다.", Toast.LENGTH_SHORT).show()
                 }
-
                 is UiState.Idle -> {}
             }
         }
