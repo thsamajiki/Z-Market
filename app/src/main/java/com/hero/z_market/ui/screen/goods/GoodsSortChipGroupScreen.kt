@@ -11,6 +11,7 @@ import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.LightGray
 import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.hero.z_market.domain.enum.GoodsSort
 import com.hero.z_market.ui.utils.ChipGroup
 import com.hero.z_market.ui.utils.ChipState
@@ -19,7 +20,7 @@ import com.hero.z_market.ui.viewmodel.ChildCategoryGoodsListViewModel
 
 @Composable
 fun GoodsSortChipGroupScreen(
-    vm: ChildCategoryGoodsListViewModel
+    vm: ChildCategoryGoodsListViewModel = hiltViewModel()
 ) {
     val selectedChipStateList = remember {
         mutableStateListOf(

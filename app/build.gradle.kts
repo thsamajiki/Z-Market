@@ -83,6 +83,7 @@ dependencies {
 
     // Navigation
     implementation(libs.navigation)
+    implementation(libs.hilt.navigation.compose)
 
     // Glide
     implementation(libs.glide)

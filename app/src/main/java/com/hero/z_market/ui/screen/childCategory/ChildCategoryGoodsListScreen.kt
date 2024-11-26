@@ -26,6 +26,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.PagingData
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.hero.z_market.data.response.PaginationItem
@@ -40,7 +41,7 @@ import com.hero.z_market.ui.viewmodel.ChildCategoryGoodsListViewModel
 @OptIn(ExperimentalMaterialApi::class, ExperimentalFoundationApi::class)
 @Composable
 fun ChildCategoryGoodsListScreen(
-    vm: ChildCategoryGoodsListViewModel,
+    vm: ChildCategoryGoodsListViewModel = hiltViewModel(),
     parentCategory: ParentCategoryEntity?,
 ) {
     val fetchChildCategoryListUiState by vm.fetchChildCategoryListUiState.collectAsState()
@@ -155,7 +156,7 @@ fun ChildCategoryGoodsListScreen(
                         }
                     }
                     Spacer(modifier = Modifier.fillMaxWidth().height(10.dp))
-                    GoodsSortChipGroupScreen(vm)
+                    GoodsSortChipGroupScreen()
                     Spacer(modifier = Modifier.fillMaxWidth().height(10.dp))
                 }
             }

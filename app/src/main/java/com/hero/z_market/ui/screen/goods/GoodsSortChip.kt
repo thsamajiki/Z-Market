@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.Color.Companion.Transparent
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.hero.z_market.R
 import com.hero.z_market.domain.enum.GoodsSort
 import com.hero.z_market.ui.utils.SortChip
@@ -26,7 +27,7 @@ import com.hero.z_market.ui.viewmodel.ChildCategoryGoodsListViewModel
 @OptIn(ExperimentalMaterialApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun GoodsSortChip(
-    vm: ChildCategoryGoodsListViewModel,
+    vm: ChildCategoryGoodsListViewModel = hiltViewModel(),
     goodsSort: GoodsSort = GoodsSort.RECOMMENDED,
     isSelected: Boolean,
     onSelected: () -> Unit,
