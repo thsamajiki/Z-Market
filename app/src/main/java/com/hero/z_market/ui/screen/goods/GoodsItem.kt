@@ -2,11 +2,13 @@ package com.hero.z_market.ui.screen.goods
 
 import android.graphics.Typeface
 import android.widget.Toast
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.CircleShape
@@ -17,10 +19,11 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Color.Companion.Black
 import androidx.compose.ui.graphics.Color.Companion.Gray
@@ -44,7 +47,7 @@ import com.hero.z_market.constants.BASE_IMG_URL
 import com.hero.z_market.domain.entity.GoodsEntity
 import com.hero.z_market.ui.preview.goods.GoodsPreviewParameterProvider
 import com.hero.z_market.ui.theme.ZMarketTheme
-import com.hero.z_market.ui.utils.TextExtension.visibility
+import com.hero.z_market.ui.utils.ModifierExtension.visible
 import com.hero.z_market.utils.FormatUtil.formatWithComma
 
 @OptIn(ExperimentalGlideComposeApi::class)
@@ -57,7 +60,9 @@ fun GoodsItem(
     val context = LocalContext.current
     val discountedPercent =
         (((goods.salePrice - goods.discountedPrice).toDouble() / goods.salePrice.toDouble()) * 100).toInt()
-    var isVisible = remember { mutableStateOf(discountedPercent != 0) }
+    var isDiscountedPercentVisible = remember { derivedStateOf { discountedPercent != 0 } }
+    var isOutOfOrder = remember { derivedStateOf { goods.goodsStatus == "일시품절" } }
+    var isSoldOut = remember { derivedStateOf { goods.goodsStatus == "판매완료" } }
 
     Card(
         modifier = modifier.clickable { onClicked(goods) },
@@ -72,11 +77,39 @@ fun GoodsItem(
                     model = BASE_IMG_URL + goods.imgPath,
                     contentDescription = "goods image"
                 )
-
+                Box(
+                    modifier = Modifier.fillMaxWidth().height(40.dp)
+                        .alpha(0.7f)
+                        .align(Alignment.BottomCenter)
+                        .visible(isOutOfOrder.value)
+                        .background(Black.copy(alpha = 0.5f)),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "일시품절",
+                        color = White,
+                        fontSize = 13.sp,
+                    )
+                }
+                Box(
+                    modifier = Modifier.fillMaxWidth().height(40.dp)
+                        .alpha(0.7f)
+                        .align(Alignment.BottomCenter)
+                        .visible(isSoldOut.value)
+                        .background(Black.copy(alpha = 0.5f)),
+                    contentAlignment = Alignment.Center
+                ) {
+                    Text(
+                        text = "판매완료",
+                        color = White,
+                        fontSize = 13.sp,
+                    )
+                }
                 Card(
                     modifier = Modifier.wrapContentSize()
                         .padding(end = 10.dp, bottom = 10.dp)
-                        .align(Alignment.BottomEnd),
+                        .align(Alignment.BottomEnd)
+                        .visible(!isOutOfOrder.value || !isSoldOut.value),
                     shape = CircleShape,
                     colors = CardDefaults.cardColors(White),
                     elevation = CardDefaults.cardElevation(4.dp),
@@ -114,7 +147,7 @@ fun GoodsItem(
         )
         Row(
             modifier = Modifier.padding(start = 7.dp, top = 5.dp)
-                .visibility(isVisible.value),
+                .visible(isDiscountedPercentVisible.value),
         ) {
             Text(
                 text = formatWithComma(goods.salePrice).toString(),
@@ -145,7 +178,7 @@ fun GoodsItem(
         ) {
             Text(
                 text = discountedPercent.toString(),
-                modifier = Modifier.alignByBaseline().visibility(isVisible.value),
+                modifier = Modifier.alignByBaseline().visible(isDiscountedPercentVisible.value),
                 fontFamily = FontFamily(Typeface.SANS_SERIF),
                 fontWeight = FontWeight.SemiBold,
                 style = MaterialTheme.typography.bodyMedium,
@@ -157,7 +190,7 @@ fun GoodsItem(
             )
             Text(
                 text = "%",
-                modifier = Modifier.alignByBaseline().visibility(isVisible.value),
+                modifier = Modifier.alignByBaseline().visible(isDiscountedPercentVisible.value),
                 fontFamily = FontFamily(Typeface.SANS_SERIF),
                 fontWeight = FontWeight.SemiBold,
                 style = MaterialTheme.typography.bodyMedium,
@@ -170,7 +203,7 @@ fun GoodsItem(
             Text(
                 text = formatWithComma(goods.discountedPrice).toString(),
                 modifier =
-                if (isVisible.value) Modifier.alignByBaseline().padding(start = 5.dp)
+                if (isDiscountedPercentVisible.value) Modifier.alignByBaseline().padding(start = 5.dp)
                 else Modifier.alignByBaseline().padding(start = 4.dp),
                 fontFamily = FontFamily(Typeface.SANS_SERIF),
                 fontWeight = FontWeight.SemiBold,
