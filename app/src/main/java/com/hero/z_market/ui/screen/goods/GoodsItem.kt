@@ -57,7 +57,6 @@ fun GoodsItem(
     modifier: Modifier,
     onClicked: (GoodsEntity) -> Unit,
 ) {
-    val context = LocalContext.current
     val discountedPercent =
         (((goods.salePrice - goods.discountedPrice).toDouble() / goods.salePrice.toDouble()) * 100).toInt()
     var isDiscountedPercentVisible = remember { derivedStateOf { discountedPercent != 0 } }
