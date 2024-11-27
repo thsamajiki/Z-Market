@@ -61,8 +61,8 @@ fun GoodsItem(
     val discountedPercent =
         (((goods.salePrice - goods.discountedPrice).toDouble() / goods.salePrice.toDouble()) * 100).toInt()
     var isDiscountedPercentVisible = remember { derivedStateOf { discountedPercent != 0 } }
-    var isOutOfOrder = remember { derivedStateOf { goods.goodsStatus == "일시품절" } }
-    var isSoldOut = remember { derivedStateOf { goods.goodsStatus == "판매완료" } }
+    val isOutOfOrder = goods.goodsStatus == "일시품절"
+    val isSoldOut = goods.goodsStatus == "판매완료"
 
     Card(
         modifier = modifier.clickable {  },
@@ -81,7 +81,7 @@ fun GoodsItem(
                     modifier = Modifier.fillMaxWidth().height(40.dp)
                         .alpha(0.7f)
                         .align(Alignment.BottomCenter)
-                        .visible(isOutOfOrder.value)
+                        .visible(isOutOfOrder)
                         .background(Black.copy(alpha = 0.5f)),
                     contentAlignment = Alignment.Center
                 ) {
@@ -95,7 +95,7 @@ fun GoodsItem(
                     modifier = Modifier.fillMaxWidth().height(40.dp)
                         .alpha(0.7f)
                         .align(Alignment.BottomCenter)
-                        .visible(isSoldOut.value)
+                        .visible(isSoldOut)
                         .background(Black.copy(alpha = 0.5f)),
                     contentAlignment = Alignment.Center
                 ) {
@@ -105,21 +105,22 @@ fun GoodsItem(
                         fontSize = 13.sp,
                     )
                 }
-                Card(
-                    modifier = Modifier.wrapContentSize()
-                        .padding(end = 10.dp, bottom = 10.dp)
-                        .align(Alignment.BottomEnd)
-                        .visible(!isOutOfOrder.value || !isSoldOut.value),
-                    shape = CircleShape,
-                    colors = CardDefaults.cardColors(White),
-                    elevation = CardDefaults.cardElevation(4.dp),
-                ) {
-                    IconButton(onClick = { onClicked(goods) }) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.icon_cart_gray),
-                            contentDescription = "Put Into Cart",
-                            tint = Color(0xFF072363)
-                        )
+                if (!isOutOfOrder && !isSoldOut) {
+                    Card(
+                        modifier = Modifier.wrapContentSize()
+                            .padding(end = 10.dp, bottom = 10.dp)
+                            .align(Alignment.BottomEnd),
+                        shape = CircleShape,
+                        colors = CardDefaults.cardColors(White),
+                        elevation = CardDefaults.cardElevation(4.dp),
+                    ) {
+                        IconButton(onClick = { onClicked(goods) }) {
+                            Icon(
+                                painter = painterResource(id = R.drawable.icon_cart_gray),
+                                contentDescription = "Put Into Cart",
+                                tint = Color(0xFF072363)
+                            )
+                        }
                     }
                 }
             }
