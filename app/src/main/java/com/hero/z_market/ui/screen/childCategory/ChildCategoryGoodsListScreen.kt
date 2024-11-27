@@ -100,7 +100,7 @@ fun ChildCategoryGoodsListScreen(
     }
 
     val snackBarHostState = remember { SnackbarHostState() }
-    val snackBarDuration = 3000L
+    val snackBarDuration = 2000L
     val coroutineScope = rememberCoroutineScope()
 
     Scaffold(
