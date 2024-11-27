@@ -8,15 +8,19 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
@@ -36,7 +40,10 @@ import com.hero.z_market.domain.entity.ParentCategoryEntity
 import com.hero.z_market.ui.screen.goods.GoodsListScreen
 import com.hero.z_market.ui.screen.goods.GoodsSortChipGroupScreen
 import com.hero.z_market.ui.state.UiState
+import com.hero.z_market.ui.utils.ToastExtension.PutIntoCartToast
 import com.hero.z_market.ui.viewmodel.ChildCategoryGoodsListViewModel
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterialApi::class, ExperimentalFoundationApi::class)
 @Composable
@@ -92,6 +99,10 @@ fun ChildCategoryGoodsListScreen(
         }
     }
 
+    val snackBarHostState = remember { SnackbarHostState() }
+    val snackBarDuration = 3000L
+    val coroutineScope = rememberCoroutineScope()
+
     Scaffold(
         topBar = {
             ChildCategoryGoodsListTopAppBar(
@@ -99,6 +110,13 @@ fun ChildCategoryGoodsListScreen(
                 onBackClick = { (context as? Activity)?.finish() }
             )
         },
+        snackbarHost = {
+            SnackbarHost(hostState = snackBarHostState,
+                modifier = Modifier.offset(y = (-20).dp)
+            ) { snackBarData ->
+                PutIntoCartToast(snackBarData.visuals.message)
+            }
+        }
     ) { innerPadding ->
         LazyColumn(
             modifier = Modifier
@@ -166,7 +184,15 @@ fun ChildCategoryGoodsListScreen(
                     is UiState.Success<PagingData<GoodsEntity>> -> {
                         GoodsListScreen(
                             goods = vm.goods.collectAsLazyPagingItems(),
-                            onClicked = {}
+                            onClicked = { goods ->
+                                coroutineScope.launch {
+                                    val job = launch {
+                                        snackBarHostState.showSnackbar(goods.goodsName)
+                                    }
+                                    delay(snackBarDuration)
+                                    job.cancel()
+                                }
+                            }
                         )
                     }
                     is UiState.Failed -> {

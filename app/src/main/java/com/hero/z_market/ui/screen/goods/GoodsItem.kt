@@ -65,7 +65,7 @@ fun GoodsItem(
     var isSoldOut = remember { derivedStateOf { goods.goodsStatus == "판매완료" } }
 
     Card(
-        modifier = modifier.clickable { onClicked(goods) },
+        modifier = modifier.clickable {  },
         colors = CardDefaults.cardColors(White),
         elevation = CardDefaults.cardElevation(4.dp),
     ) {
@@ -114,13 +114,7 @@ fun GoodsItem(
                     colors = CardDefaults.cardColors(White),
                     elevation = CardDefaults.cardElevation(4.dp),
                 ) {
-                    IconButton(onClick = {
-                        Toast.makeText(
-                            context,
-                            "${goods.goodsName}이 장바구니에 담겼습니다.",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                    }) {
+                    IconButton(onClick = { onClicked(goods) }) {
                         Icon(
                             painter = painterResource(id = R.drawable.icon_cart_gray),
                             contentDescription = "Put Into Cart",
