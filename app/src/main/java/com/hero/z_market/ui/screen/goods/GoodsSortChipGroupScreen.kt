@@ -32,7 +32,6 @@ fun GoodsSortChipGroupScreen(
     }
 
     ChipGroup(
-        vm = vm,
         modifier = Modifier.padding(horizontal = 20.dp),
         chipStateList = selectedChipStateList,
         chipStyle = ChipStyle(

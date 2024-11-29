@@ -37,10 +37,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.hero.z_market.R
 import com.hero.z_market.ui.theme.ZMarketTheme
-import com.hero.z_market.ui.viewmodel.ChildCategoryGoodsListViewModel
 
 @Composable
 fun SortChip(
@@ -105,7 +103,6 @@ fun SortChip(
 
 @Composable
 fun ChipGroup(
-    vm: ChildCategoryGoodsListViewModel = hiltViewModel(),
     modifier: Modifier = Modifier,
     chipStateList: List<ChipState>,
     chipStyle: ChipStyle,
