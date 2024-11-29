@@ -48,7 +48,7 @@ fun ParentCategoryItem(
             ),
         shape = RoundedCornerShape(corner = CornerSize(6.dp)),
         colors = CardDefaults.cardColors(White),
-        elevation = CardDefaults.cardElevation(1.dp),
+        elevation = CardDefaults.cardElevation(2.dp),
     ) {
         Row(
             modifier = Modifier
