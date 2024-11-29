@@ -4,8 +4,10 @@ import android.graphics.Typeface
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -20,6 +22,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -38,6 +42,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.hero.z_market.R
+import com.hero.z_market.domain.enum.GoodsSort
 import com.hero.z_market.ui.theme.ZMarketTheme
 
 @Composable
@@ -152,30 +157,62 @@ data class ChipStyle(
 @Preview(showBackground = true)
 fun ChipPreview() {
     ZMarketTheme {
-        SortChip(
-            modifier = Modifier,
-            selected = true,
-            onChipClicked = { content, isSelected ->
+        Column {
+            SortChip(
+                modifier = Modifier,
+                selected = true,
+                onChipClicked = { content, isSelected ->
 
-            },
-            text = "낮은가격순",
-            enabled = true,
-            leadingIcon = {
-                Icon(
-                    imageVector = ImageVector.vectorResource(id = R.drawable.icon_selected_order),
-                    contentDescription = "Selected icon",
-                    modifier = Modifier
-                        .size(4.dp)
-                        .padding(start = 10.dp),
-                    tint = Blue
-                )
-            },
-            shape = FilterChipDefaults.shape,
-            selectedColor = Transparent,
-            unselectedColor = Transparent,
-            chipTextStyle = MaterialTheme.typography.bodyMedium,
-            selectedTextColor = Black,
-            unselectedTextColor = LightGray,
-        )
+                },
+                text = "낮은가격순",
+                enabled = true,
+                leadingIcon = {
+                    Icon(
+                        imageVector = ImageVector.vectorResource(id = R.drawable.icon_selected_order),
+                        contentDescription = "Selected icon",
+                        modifier = Modifier
+                            .size(4.dp)
+                            .padding(start = 10.dp),
+                        tint = Blue
+                    )
+                },
+                shape = FilterChipDefaults.shape,
+                selectedColor = Transparent,
+                unselectedColor = Transparent,
+                chipTextStyle = MaterialTheme.typography.bodyMedium,
+                selectedTextColor = Black,
+                unselectedTextColor = LightGray,
+            )
+            
+            Spacer(modifier = Modifier.height(10.dp))
+
+            val selectedChipState = remember { mutableStateOf(true) }
+            val unselectedChipState = remember { mutableStateOf(false) }
+
+            val selectedChipStateList = listOf(
+                ChipState(GoodsSort.RECOMMENDED.value, selectedChipState),
+                ChipState(GoodsSort.BOUGHT.value, unselectedChipState),
+                ChipState(GoodsSort.ASCENDING.value, unselectedChipState),
+                ChipState(GoodsSort.DESCENDING.value, unselectedChipState)
+            )
+
+            val chipStyle = ChipStyle(
+                selectedColor = Transparent,
+                unselectedColor = Transparent,
+                chipTextStyle = MaterialTheme.typography.bodyMedium,
+                selectedTextColor = Black,
+                unselectedTextColor = LightGray,
+            )
+
+            ChipGroup(
+                modifier = Modifier,
+                chipStateList = selectedChipStateList,
+                chipStyle = chipStyle,
+                onChipClicked = { _, isSelected, index ->
+                    val selectedChip = selectedChipStateList[index]
+                    selectedChip.isSelected.value = !isSelected
+                }
+            )
+        }
     }
 }
