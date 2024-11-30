@@ -11,8 +11,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.hero.z_market.ui.screen.home.HomeScreen
-import com.hero.z_market.ui.screen.home.HomeTopAppBar
+import com.hero.z_market.ui.screen.category.CategoryListScreen
+import com.hero.z_market.ui.screen.category.CategoryListTopAppBar
 import com.hero.z_market.ui.viewmodel.MainViewModel
 
 @Composable
@@ -24,7 +24,7 @@ fun MainScreen(mainViewModel: MainViewModel = hiltViewModel()) {
             val screenRoute = navController.currentBackStackEntryAsState().value?.destination?.route
             when (screenRoute) {
                 BottomNavItem.Home.screenRoute -> {
-                    HomeTopAppBar()
+                    CategoryListTopAppBar()
                 }
             }
         },
@@ -44,7 +44,7 @@ fun MainScreen(mainViewModel: MainViewModel = hiltViewModel()) {
                 composable(BottomNavItem.Favorites.screenRoute) {
                 }
                 composable(BottomNavItem.Home.screenRoute) {
-                    HomeScreen(mainViewModel)
+                    CategoryListScreen(mainViewModel)
                 }
                 composable(BottomNavItem.Cart.screenRoute) {
                 }

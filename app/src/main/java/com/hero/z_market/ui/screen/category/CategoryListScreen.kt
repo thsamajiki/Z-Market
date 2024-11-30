@@ -1,4 +1,4 @@
-package com.hero.z_market.ui.screen.home
+package com.hero.z_market.ui.screen.category
 
 import android.graphics.Typeface
 import android.widget.Toast
@@ -29,12 +29,12 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.hero.z_market.domain.entity.ParentCategoryEntity
 import com.hero.z_market.ui.ChildCategoryGoodsListActivity
 import com.hero.z_market.ui.MainActivity.Companion.PARENT_CATEGORY
-import com.hero.z_market.ui.screen.parentCategory.ParentCategoryListScreen
+import com.hero.z_market.ui.screen.category.parentCategory.ParentCategoryListScreen
 import com.hero.z_market.ui.state.UiState
 import com.hero.z_market.ui.viewmodel.MainViewModel
 
 @Composable
-fun HomeScreen(vm: MainViewModel = hiltViewModel()) {
+fun CategoryListScreen(vm: MainViewModel = hiltViewModel()) {
     val uiState by vm.fetchParentCategoryListUiState.collectAsState()
     val context = LocalContext.current
 

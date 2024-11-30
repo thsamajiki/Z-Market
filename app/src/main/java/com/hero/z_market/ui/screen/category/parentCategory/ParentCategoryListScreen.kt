@@ -1,4 +1,4 @@
-package com.hero.z_market.ui.screen.parentCategory
+package com.hero.z_market.ui.screen.category.parentCategory
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues

@@ -17,7 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.hero.z_market.domain.entity.ParentCategoryEntity
 import com.hero.z_market.domain.enum.GoodsSort
 import com.hero.z_market.ui.MainActivity.Companion.PARENT_CATEGORY
-import com.hero.z_market.ui.screen.childCategory.ChildCategoryGoodsListScreen
+import com.hero.z_market.ui.screen.category.childCategory.ChildCategoryGoodsListScreen
 import com.hero.z_market.ui.theme.ZMarketTheme
 import com.hero.z_market.ui.viewmodel.ChildCategoryGoodsListViewModel
 import dagger.hilt.android.AndroidEntryPoint
