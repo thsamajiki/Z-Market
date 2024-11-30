@@ -2,7 +2,10 @@ package com.hero.z_market.ui.screen.category
 
 import android.graphics.Typeface
 import android.widget.Toast
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
@@ -85,8 +88,9 @@ fun CategoryListScreen(vm: MainViewModel = hiltViewModel()) {
         }
 
         item {
+            Spacer(modifier = Modifier.fillMaxWidth().height(50.dp))
             Text(
-                modifier = Modifier.padding(20.dp, 50.dp, 0.dp, 0.dp),
+                modifier = Modifier.padding(start = 20.dp),
                 text = "기획전 / 이벤트",
                 fontSize = 15.sp,
                 fontFamily = FontFamily(Typeface.SANS_SERIF),
