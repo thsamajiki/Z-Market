@@ -1,4 +1,4 @@
-package com.hero.z_market.ui.screen.goods
+package com.hero.z_market.ui.screen.category.goods
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
