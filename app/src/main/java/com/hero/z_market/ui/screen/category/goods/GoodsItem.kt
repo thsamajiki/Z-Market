@@ -2,11 +2,13 @@ package com.hero.z_market.ui.screen.category.goods
 
 import android.graphics.Typeface
 import android.widget.Toast
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -62,6 +64,7 @@ fun GoodsItem(
     var isDiscountedPercentVisible = remember { derivedStateOf { discountedPercent != 0 } }
     val isOutOfOrder = goods.goodsStatus == "일시품절"
     val isSoldOut = goods.goodsStatus == "판매완료"
+    val isAdultAuthRequestRequired = goods.adultAuthRequestYesNo == "Y"
 
     Card(
         modifier = modifier.clickable {  },
@@ -103,6 +106,19 @@ fun GoodsItem(
                         color = White,
                         fontSize = 13.sp,
                     )
+                }
+                if (isAdultAuthRequestRequired) {
+                    Box(
+                        modifier = Modifier.fillMaxSize()
+                            .background(Black.copy(alpha = 0.5f))
+
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.icon_adult_19),
+                            modifier = Modifier.align(Alignment.Center),
+                            contentDescription = "adult auth request"
+                        )
+                    }
                 }
                 if (!isOutOfOrder && !isSoldOut) {
                     Card(
