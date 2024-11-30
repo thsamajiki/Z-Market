@@ -1,4 +1,4 @@
-package com.hero.z_market.ui.screen.childCategory
+package com.hero.z_market.ui.screen.category.childCategory
 
 import android.widget.Toast
 import androidx.compose.material.icons.Icons

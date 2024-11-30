@@ -1,4 +1,4 @@
-package com.hero.z_market.ui.screen.childCategory
+package com.hero.z_market.ui.screen.category.childCategory
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn

@@ -1,4 +1,4 @@
-package com.hero.z_market.ui.screen.childCategory
+package com.hero.z_market.ui.screen.category.childCategory
 
 import android.app.Activity
 import android.widget.Toast
@@ -37,8 +37,8 @@ import com.hero.z_market.data.response.PaginationItem
 import com.hero.z_market.domain.entity.ChildCategoryEntity
 import com.hero.z_market.domain.entity.GoodsEntity
 import com.hero.z_market.domain.entity.ParentCategoryEntity
-import com.hero.z_market.ui.screen.goods.GoodsListScreen
-import com.hero.z_market.ui.screen.goods.GoodsSortChipGroupScreen
+import com.hero.z_market.ui.screen.category.goods.GoodsListScreen
+import com.hero.z_market.ui.screen.category.goods.GoodsSortChipGroupScreen
 import com.hero.z_market.ui.state.UiState
 import com.hero.z_market.ui.utils.ToastExtension.PutIntoCartToast
 import com.hero.z_market.ui.viewmodel.ChildCategoryGoodsListViewModel
