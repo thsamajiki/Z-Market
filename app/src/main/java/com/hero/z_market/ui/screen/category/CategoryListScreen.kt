@@ -1,4 +1,4 @@
-package com.hero.z_market.ui.screen.home
+package com.hero.z_market.ui.screen.category
 
 import android.graphics.Typeface
 import android.widget.Toast
