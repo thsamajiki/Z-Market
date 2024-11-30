@@ -11,7 +11,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.hero.z_market.ui.screen.home.HomeScreen
+import com.hero.z_market.ui.screen.home.CategoryListScreen
 import com.hero.z_market.ui.screen.home.HomeTopAppBar
 import com.hero.z_market.ui.viewmodel.MainViewModel
 
@@ -44,7 +44,7 @@ fun MainScreen(mainViewModel: MainViewModel = hiltViewModel()) {
                 composable(BottomNavItem.Favorites.screenRoute) {
                 }
                 composable(BottomNavItem.Home.screenRoute) {
-                    HomeScreen(mainViewModel)
+                    CategoryListScreen(mainViewModel)
                 }
                 composable(BottomNavItem.Cart.screenRoute) {
                 }

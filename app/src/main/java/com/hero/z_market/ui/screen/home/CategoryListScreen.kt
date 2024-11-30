@@ -34,7 +34,7 @@ import com.hero.z_market.ui.state.UiState
 import com.hero.z_market.ui.viewmodel.MainViewModel
 
 @Composable
-fun HomeScreen(vm: MainViewModel = hiltViewModel()) {
+fun CategoryListScreen(vm: MainViewModel = hiltViewModel()) {
     val uiState by vm.fetchParentCategoryListUiState.collectAsState()
     val context = LocalContext.current
 
