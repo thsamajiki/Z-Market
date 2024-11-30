@@ -29,7 +29,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import com.hero.z_market.domain.entity.ParentCategoryEntity
 import com.hero.z_market.ui.ChildCategoryGoodsListActivity
 import com.hero.z_market.ui.MainActivity.Companion.PARENT_CATEGORY
-import com.hero.z_market.ui.screen.parentCategory.ParentCategoryListScreen
+import com.hero.z_market.ui.screen.category.parentCategory.ParentCategoryListScreen
 import com.hero.z_market.ui.state.UiState
 import com.hero.z_market.ui.viewmodel.MainViewModel
 
