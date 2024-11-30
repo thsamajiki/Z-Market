@@ -1,4 +1,4 @@
-package com.hero.z_market.ui.screen.home
+package com.hero.z_market.ui.screen.category
 
 import android.widget.Toast
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -19,7 +19,7 @@ import com.hero.z_market.ui.theme.ZMarketTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeTopAppBar() {
+fun CategoryListTopAppBar() {
     val context = LocalContext.current
 
     TopAppBar(
@@ -52,6 +52,6 @@ fun HomeTopAppBar() {
 @Preview(showBackground = true)
 fun MainTopAppBarPreview() {
     ZMarketTheme {
-        HomeTopAppBar()
+        CategoryListTopAppBar()
     }
 }
