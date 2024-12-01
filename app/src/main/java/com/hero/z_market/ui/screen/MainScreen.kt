@@ -23,7 +23,7 @@ fun MainScreen(mainViewModel: MainViewModel = hiltViewModel()) {
         topBar = {
             val screenRoute = navController.currentBackStackEntryAsState().value?.destination?.route
             when (screenRoute) {
-                BottomNavItem.Home.screenRoute -> {
+                BottomNavItem.Categories.screenRoute -> {
                     CategoryListTopAppBar()
                 }
             }
@@ -37,14 +37,14 @@ fun MainScreen(mainViewModel: MainViewModel = hiltViewModel()) {
         ) {
             NavHost(
                 navController = navController,
-                startDestination = BottomNavItem.Home.screenRoute, // 기본 시작 경로 설정,
+                startDestination = BottomNavItem.Categories.screenRoute, // 기본 시작 경로 설정,
             ) {
                 composable(BottomNavItem.Categories.screenRoute) {
+                    CategoryListScreen(mainViewModel)
                 }
                 composable(BottomNavItem.Favorites.screenRoute) {
                 }
                 composable(BottomNavItem.Home.screenRoute) {
-                    CategoryListScreen(mainViewModel)
                 }
                 composable(BottomNavItem.Cart.screenRoute) {
                 }
