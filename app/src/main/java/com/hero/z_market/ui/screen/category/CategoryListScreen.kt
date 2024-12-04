@@ -1,5 +1,6 @@
 package com.hero.z_market.ui.screen.category
 
+import android.content.Context
 import android.graphics.Typeface
 import android.widget.Toast
 import androidx.compose.foundation.layout.Spacer
@@ -31,8 +32,8 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.hero.z_market.domain.entity.ParentCategoryEntity
 import com.hero.z_market.ui.ChildCategoryGoodsListActivity
-import com.hero.z_market.ui.MainActivity.Companion.PARENT_CATEGORY
 import com.hero.z_market.ui.screen.category.parentCategory.ParentCategoryListScreen
+import com.hero.z_market.ui.state.UiEffect
 import com.hero.z_market.ui.state.UiState
 import com.hero.z_market.ui.viewmodel.MainViewModel
 
@@ -57,7 +58,11 @@ fun CategoryListScreen(vm: MainViewModel = hiltViewModel()) {
     }
 
     LaunchedEffect(Unit) {
-        vm.fetchParentCategoryList()
+        vm.handleEvent(MainViewModel.MainUiEvent.FetchParentCategoryList)
+
+        vm.parentCategoryUiEffect.collect { effect ->
+            handleUiEffects(effect, context)
+        }
     }
 
     LazyColumn(
@@ -68,21 +73,15 @@ fun CategoryListScreen(vm: MainViewModel = hiltViewModel()) {
         item {
             when (uiState) {
                 is UiState.Success<List<ParentCategoryEntity>> -> {
+                    val categories = (uiState as UiState.Success<List<ParentCategoryEntity>>).data
                     ParentCategoryListScreen(
-                        parentCategoryList = (uiState as UiState.Success<List<ParentCategoryEntity>>).data,
+                        parentCategoryList = categories,
                         onClicked = { parentCategory ->
-                            val intent =
-                                ChildCategoryGoodsListActivity.getIntent(context, parentCategory)
-                                    .apply {
-                                        putExtra(PARENT_CATEGORY, parentCategory)
-                                    }
-                            context.startActivity(intent)
+                            vm.handleEvent(MainViewModel.MainUiEvent.OnClickParentCategory(parentCategory))
                         }
                     )
                 }
-                is UiState.Failed -> {
-                    Toast.makeText(context, "데이터를 불러오는 데 실패했습니다.", Toast.LENGTH_SHORT).show()
-                }
+                is UiState.Failed -> {}
                 is UiState.Idle -> {}
             }
         }
@@ -98,6 +97,24 @@ fun CategoryListScreen(vm: MainViewModel = hiltViewModel()) {
                 style = MaterialTheme.typography.bodyMedium,
                 color = Color.Black,
             )
+        }
+    }
+}
+
+private fun handleUiEffects(
+    effect: UiEffect<ParentCategoryEntity>,
+    context: Context
+) {
+    when (effect) {
+        is UiEffect.ShowToast -> {
+            Toast.makeText(context, effect.message, Toast.LENGTH_SHORT).show()
+        }
+        is UiEffect.NavigateTo<ParentCategoryEntity> -> {
+            val parentCategory = effect._data
+            if (parentCategory != null) {
+                val intent = ChildCategoryGoodsListActivity.getIntent(context, parentCategory)
+                context.startActivity(intent)
+            }
         }
     }
 }
