@@ -161,7 +161,7 @@ fun ChildCategoryGoodsListScreen(
             }
 
             stickyHeader {
-                Spacer(modifier = Modifier.fillMaxWidth().height(30.dp))
+                Spacer(modifier = Modifier.fillMaxWidth().height(35.dp))
                 Column {
                     when(fetchPaginationUiState) {
                         is UiState.Success<PaginationItem> -> {
